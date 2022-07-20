@@ -44,12 +44,25 @@ const enemies = [
   }),
 ];
 
+const towers = [
+  new Tower({
+    x: tileSize * 5,
+    y: tileSize * 4,
+  }),
+];
+
+let step = 0;
 function animate() {
+  step++;
   requestAnimationFrame(animate);
   drawMap();
 
   for (let i = 0; i < enemies.length; i++) {
     enemies[i].update();
+  }
+
+  for (let i = 0; i < towers.length; i++) {
+    towers[i].update(step);
   }
 }
 
