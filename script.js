@@ -62,7 +62,7 @@ function animate() {
   }
 
   for (let i = 0; i < towers.length; i++) {
-    towers[i].update(step);
+    towers[i].update(step, enemies);
   }
 }
 
