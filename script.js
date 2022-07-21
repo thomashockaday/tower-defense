@@ -42,13 +42,39 @@ const enemies = [
     x: -tileSize * 3,
     y: firstPathTilePosition * tileSize,
   }),
+  new Enemy({
+    x: -tileSize * 5,
+    y: firstPathTilePosition * tileSize,
+  }),
+  new Enemy({
+    x: -tileSize * 7,
+    y: firstPathTilePosition * tileSize,
+  }),
+  new Enemy({
+    x: -tileSize * 9,
+    y: firstPathTilePosition * tileSize,
+  }),
+  new Enemy({
+    x: -tileSize * 11,
+    y: firstPathTilePosition * tileSize,
+  }),
 ];
 
 const towers = [
-  new Tower({
-    x: tileSize * 5,
-    y: tileSize * 4,
-  }),
+  new Tower(
+    {
+      x: tileSize * 5,
+      y: tileSize * 4,
+    },
+    5
+  ),
+  new Tower(
+    {
+      x: tileSize * 5,
+      y: tileSize * 8,
+    },
+    10
+  ),
 ];
 
 let step = 0;
@@ -59,10 +85,23 @@ function animate() {
 
   for (let i = 0; i < enemies.length; i++) {
     enemies[i].update();
+
+    if (enemies[i].health <= 0) {
+      enemies.splice(i, 1);
+    }
   }
 
   for (let i = 0; i < towers.length; i++) {
     towers[i].update(step, enemies);
+
+    for (let j = 0; j < towers[i].bullets.length; j++) {
+      for (let k = 0; k < enemies.length; k++) {
+        if (circleRectCollision(towers[i].bullets[j], enemies[k])) {
+          enemies[k].health -= 1;
+          towers[i].bullets[j].finished = true;
+        }
+      }
+    }
   }
 }
 

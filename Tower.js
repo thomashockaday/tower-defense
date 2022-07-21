@@ -1,9 +1,10 @@
 class Tower {
-  constructor(position) {
+  constructor(position, radius) {
     this.position = position;
+
     this.width = tileSize;
     this.height = tileSize;
-    this.radius = 5;
+    this.radius = radius;
     this.range = {
       position: {
         x: this.position.x - Math.floor(this.radius / 2) * tileSize,
@@ -13,6 +14,31 @@ class Tower {
       height: this.radius * tileSize,
     };
     this.cooldown = 50;
+    this.bullets = [];
+    this.maxBullets = 2;
+  }
+
+  update(step, enemies) {
+    this.draw();
+
+    if (step % this.cooldown === 0) {
+      for (let i = 0; i < enemies.length; i++) {
+        if (
+          rectRectCollision(enemies[i], this.range) &&
+          this.bullets.length < this.maxBullets
+        ) {
+          this.#shoot(enemies[i]);
+        }
+      }
+    }
+
+    for (let i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].update();
+
+      if (this.bullets[i].finished === true) {
+        this.bullets.splice(i, 1);
+      }
+    }
   }
 
   draw() {
@@ -28,15 +54,22 @@ class Tower {
     );
   }
 
-  update(step, enemies) {
-    if (step % this.cooldown === 0) {
-      for (let i = 0; i < enemies.length; i++) {
-        if (rectRectCollision(enemies[i], this.range)) {
-          console.log("shoot enemy " + i);
-        }
-      }
-    }
+  #shoot(enemy) {
+    const angle = Math.atan2(
+      enemy.position.y + enemy.height / 2 - (this.position.y + this.height / 2),
+      enemy.position.x + enemy.width / 2 - (this.position.x + this.width / 2)
+    );
 
-    this.draw();
+    const bullet = new Bullet(
+      {
+        x: this.position.x + this.width / 2,
+        y: this.position.y + this.height / 2,
+      },
+      {
+        x: Math.cos(angle),
+        y: Math.sin(angle),
+      }
+    );
+    this.bullets.push(bullet);
   }
 }

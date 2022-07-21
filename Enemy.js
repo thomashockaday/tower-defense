@@ -6,13 +6,8 @@ class Enemy {
 
     this.currentDirection = null;
     this.nextDirection = null;
-
-    this.speed = 4;
-  }
-
-  draw() {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    this.speed = 2;
+    this.health = 5;
   }
 
   update() {
@@ -36,6 +31,11 @@ class Enemy {
     }
 
     this.draw();
+  }
+
+  draw() {
+    ctx.fillStyle = "red";
+    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
   #calculateNextDirection() {
