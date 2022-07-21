@@ -31,23 +31,12 @@ class Tower {
   update(step, enemies) {
     if (step % this.cooldown === 0) {
       for (let i = 0; i < enemies.length; i++) {
-        if (this.#enemyInRange(enemies[i])) {
+        if (rectRectCollision(enemies[i], this.range)) {
           console.log("shoot enemy " + i);
         }
       }
     }
 
     this.draw();
-  }
-
-  #enemyInRange(enemy) {
-    return (
-      enemy.position.x >= this.range.position.x &&
-      enemy.position.x + enemy.width <=
-        this.range.position.x + this.range.width &&
-      enemy.position.y >= this.range.position.y &&
-      enemy.position.y + enemy.height <=
-        this.range.position.y + this.range.width
-    );
   }
 }
