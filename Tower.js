@@ -28,6 +28,7 @@ class Tower {
           this.bullets.length < this.maxBullets
         ) {
           this.#shoot(enemies[i]);
+          break;
         }
       }
     }
