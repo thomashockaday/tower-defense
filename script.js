@@ -25,6 +25,7 @@ const firstPathTile = map.tiles.map((tile) => tile[0]);
 const firstPathTilePosition = firstPathTile.indexOf(1);
 
 let lives = 3;
+let score = 0;
 
 const enemies = [
   new Enemy(
@@ -106,6 +107,7 @@ function animate() {
 
     if (enemies[i].health <= 0) {
       enemies.splice(i, 1);
+      score++;
     }
 
     if (enemies[i].position.x >= canvas.width) {
@@ -132,6 +134,7 @@ function animate() {
   ctx.textBaseline = "top";
   ctx.textAlign = "right";
   ctx.fillText(`Lives: ${lives}`, canvas.width - 20, 20);
+  ctx.fillText(`Score: ${score}`, canvas.width - 20, 60);
 
   if (lives === 0) {
     ctx.font = `${map.tileSize}px sans-serif`;

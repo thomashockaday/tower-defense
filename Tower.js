@@ -13,7 +13,7 @@ class Tower {
       width: this.radius * width,
       height: this.radius * height,
     };
-    this.cooldown = 50;
+    this.cooldown = 20;
     this.bullets = [];
     this.maxBullets = 2;
   }
