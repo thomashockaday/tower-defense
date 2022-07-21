@@ -45,38 +45,39 @@ class Enemy {
 
     const currentTileX = this.position.x / this.width;
     const currentTileY = this.position.y / this.height;
+    const flooredCurrentTileX = Math.floor(currentTileX);
+    const flooredCurrentTileY = Math.floor(currentTileY);
 
     if (
-      currentTileX === Math.floor(currentTileX) &&
-      currentTileY === Math.floor(currentTileY) &&
-      tiles[Math.floor(currentTileY) - 1][Math.floor(currentTileX)] === 1 &&
+      currentTileX !== flooredCurrentTileX ||
+      currentTileY !== flooredCurrentTileY
+    ) {
+      return this.currentDirection;
+    }
+
+    if (
+      tiles[flooredCurrentTileY - 1][flooredCurrentTileX] === 1 &&
       this.currentDirection !== "down"
     ) {
       return "up";
     }
 
     if (
-      currentTileX === Math.floor(currentTileX) &&
-      currentTileY === Math.floor(currentTileY) &&
-      tiles[Math.ceil(currentTileY)][Math.ceil(currentTileX + 1)] === 1 &&
+      tiles[flooredCurrentTileY][flooredCurrentTileX + 1] === 1 &&
       this.currentDirection !== "left"
     ) {
       return "right";
     }
 
     if (
-      currentTileX === Math.floor(currentTileX) &&
-      currentTileY === Math.floor(currentTileY) &&
-      tiles[Math.ceil(currentTileY) + 1][Math.floor(currentTileX)] === 1 &&
+      tiles[flooredCurrentTileY + 1][flooredCurrentTileX] === 1 &&
       this.currentDirection !== "up"
     ) {
       return "down";
     }
 
     if (
-      currentTileX === Math.floor(currentTileX) &&
-      currentTileY === Math.floor(currentTileY) &&
-      tiles[Math.ceil(currentTileY)][Math.floor(currentTileX - 1)] === 1 &&
+      tiles[flooredCurrentTileY][flooredCurrentTileX - 1] === 1 &&
       this.currentDirection !== "right"
     ) {
       return "left";
