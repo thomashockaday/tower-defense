@@ -1,8 +1,9 @@
 class Enemy {
-  constructor(position) {
+  constructor(position, map) {
     this.position = position;
-    this.width = tileSize;
-    this.height = tileSize;
+    this.map = map;
+    this.width = map.tileSize;
+    this.height = map.tileSize;
 
     this.currentDirection = null;
     this.nextDirection = null;
@@ -56,28 +57,28 @@ class Enemy {
     }
 
     if (
-      tiles[flooredCurrentTileY - 1][flooredCurrentTileX] === 1 &&
+      this.map.tiles[flooredCurrentTileY - 1][flooredCurrentTileX] === 1 &&
       this.currentDirection !== "down"
     ) {
       return "up";
     }
 
     if (
-      tiles[flooredCurrentTileY][flooredCurrentTileX + 1] === 1 &&
+      this.map.tiles[flooredCurrentTileY][flooredCurrentTileX + 1] === 1 &&
       this.currentDirection !== "left"
     ) {
       return "right";
     }
 
     if (
-      tiles[flooredCurrentTileY + 1][flooredCurrentTileX] === 1 &&
+      this.map.tiles[flooredCurrentTileY + 1][flooredCurrentTileX] === 1 &&
       this.currentDirection !== "up"
     ) {
       return "down";
     }
 
     if (
-      tiles[flooredCurrentTileY][flooredCurrentTileX - 1] === 1 &&
+      this.map.tiles[flooredCurrentTileY][flooredCurrentTileX - 1] === 1 &&
       this.currentDirection !== "right"
     ) {
       return "left";

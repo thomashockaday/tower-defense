@@ -1,17 +1,17 @@
 class Tower {
-  constructor(position, radius) {
+  constructor(position, width, height, radius) {
     this.position = position;
-
-    this.width = tileSize;
-    this.height = tileSize;
+    this.width = width;
+    this.height = height;
     this.radius = radius;
+
     this.range = {
       position: {
-        x: this.position.x - Math.floor(this.radius / 2) * tileSize,
-        y: this.position.y - Math.floor(this.radius / 2) * tileSize,
+        x: this.position.x - Math.floor(this.radius / 2) * width,
+        y: this.position.y - Math.floor(this.radius / 2) * height,
       },
-      width: this.radius * tileSize,
-      height: this.radius * tileSize,
+      width: this.radius * width,
+      height: this.radius * height,
     };
     this.cooldown = 50;
     this.bullets = [];
