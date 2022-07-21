@@ -1,12 +1,18 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+/**
+ * Key:
+ * 0: Blank
+ * 1: Path
+ * 2: Basic Tower
+ */
 const tiles = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1],
+  [0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1],
   [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
   [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0],
   [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
@@ -26,6 +32,13 @@ const firstPathTilePosition = firstPathTile.indexOf(1);
 
 let lives = 3;
 let score = 0;
+let hoverTile = new HoverTile(
+  {
+    x: -1,
+    y: -1,
+  },
+  map.tileSize
+);
 
 const enemies = [
   new Enemy(
@@ -72,27 +85,6 @@ const enemies = [
   ),
 ];
 
-const towers = [
-  new Tower(
-    {
-      x: map.tileSize * 5,
-      y: map.tileSize * 4,
-    },
-    map.tileSize,
-    map.tileSize,
-    5
-  ),
-  new Tower(
-    {
-      x: map.tileSize * 5,
-      y: map.tileSize * 8,
-    },
-    map.tileSize,
-    map.tileSize,
-    10
-  ),
-];
-
 let step = 0;
 let animationFrame;
 
@@ -102,32 +94,44 @@ function animate() {
 
   map.draw();
 
+  if (enemies.length === 0) {
+    ctx.fillStyle = "white";
+    ctx.font = `${map.tileSize}px sans-serif`;
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    ctx.fillText("You win!", canvas.width / 2, canvas.height / 2);
+    canvas.removeEventListener("mousemove", mousemoveHandler);
+    canvas.removeEventListener("click", clickHandler);
+  }
+
   for (let i = 0; i < enemies.length; i++) {
     enemies[i].update();
-
-    if (enemies[i].health <= 0) {
-      enemies.splice(i, 1);
-      score++;
-    }
 
     if (enemies[i].position.x >= canvas.width) {
       enemies.splice(i, 1);
       lives--;
     }
+
+    if (enemies[i].health <= 0) {
+      enemies.splice(i, 1);
+      score++;
+    }
   }
 
-  for (let i = 0; i < towers.length; i++) {
-    towers[i].update(step, enemies);
+  for (let i = 0; i < map.towers.length; i++) {
+    map.towers[i].update(step, enemies);
 
-    for (let j = 0; j < towers[i].bullets.length; j++) {
+    for (let j = 0; j < map.towers[i].bullets.length; j++) {
       for (let k = 0; k < enemies.length; k++) {
-        if (Collision.circleRect(towers[i].bullets[j], enemies[k])) {
+        if (Collision.circleRect(map.towers[i].bullets[j], enemies[k])) {
           enemies[k].health--;
-          towers[i].bullets[j].finished = true;
+          map.towers[i].bullets[j].finished = true;
         }
       }
     }
   }
+
+  hoverTile.update();
 
   ctx.fillStyle = "white";
   ctx.font = `${map.tileSize / 2}px sans-serif`;
@@ -142,7 +146,37 @@ function animate() {
     ctx.textAlign = "center";
     ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
     cancelAnimationFrame(animationFrame);
+    canvas.removeEventListener("mousemove", mousemoveHandler);
+    canvas.removeEventListener("click", clickHandler);
   }
 }
+
+const mousemoveHandler = (e) => {
+  hoverTile.position = {
+    x: Math.floor(e.clientX / map.tileSize) * map.tileSize,
+    y: Math.floor(e.clientY / map.tileSize) * map.tileSize,
+  };
+};
+
+const clickHandler = () => {
+  if (map.canPlaceTower(hoverTile.currentTile)) {
+    map.tiles[hoverTile.currentTile.y][hoverTile.currentTile.x] = 2;
+
+    map.towers.push(
+      new Tower(
+        {
+          x: hoverTile.position.x,
+          y: hoverTile.position.y,
+        },
+        map.tileSize,
+        map.tileSize,
+        5
+      )
+    );
+  }
+};
+
+moveListener = canvas.addEventListener("mousemove", mousemoveHandler);
+clickListener = canvas.addEventListener("click", clickHandler);
 
 animate();
