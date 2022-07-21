@@ -24,6 +24,8 @@ canvas.height = map.tiles.length * map.tileSize;
 const firstPathTile = map.tiles.map((tile) => tile[0]);
 const firstPathTilePosition = firstPathTile.indexOf(1);
 
+let lives = 3;
+
 const enemies = [
   new Enemy(
     {
@@ -91,9 +93,11 @@ const towers = [
 ];
 
 let step = 0;
+let animationFrame;
+
 function animate() {
   step++;
-  requestAnimationFrame(animate);
+  animationFrame = requestAnimationFrame(animate);
 
   map.draw();
 
@@ -103,6 +107,11 @@ function animate() {
     if (enemies[i].health <= 0) {
       enemies.splice(i, 1);
     }
+
+    if (enemies[i].position.x >= canvas.width) {
+      enemies.splice(i, 1);
+      lives--;
+    }
   }
 
   for (let i = 0; i < towers.length; i++) {
@@ -111,11 +120,25 @@ function animate() {
     for (let j = 0; j < towers[i].bullets.length; j++) {
       for (let k = 0; k < enemies.length; k++) {
         if (Collision.circleRect(towers[i].bullets[j], enemies[k])) {
-          enemies[k].health -= 1;
+          enemies[k].health--;
           towers[i].bullets[j].finished = true;
         }
       }
     }
+  }
+
+  ctx.fillStyle = "white";
+  ctx.font = `${map.tileSize / 2}px sans-serif`;
+  ctx.textBaseline = "top";
+  ctx.textAlign = "right";
+  ctx.fillText(`Lives: ${lives}`, canvas.width - 20, 20);
+
+  if (lives === 0) {
+    ctx.font = `${map.tileSize}px sans-serif`;
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+    cancelAnimationFrame(animationFrame);
   }
 }
 
