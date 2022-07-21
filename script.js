@@ -110,7 +110,7 @@ function animate() {
 
     for (let j = 0; j < towers[i].bullets.length; j++) {
       for (let k = 0; k < enemies.length; k++) {
-        if (circleRectCollision(towers[i].bullets[j], enemies[k])) {
+        if (Collision.circleRect(towers[i].bullets[j], enemies[k])) {
           enemies[k].health -= 1;
           towers[i].bullets[j].finished = true;
         }
