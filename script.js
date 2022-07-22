@@ -117,17 +117,21 @@ function animate() {
     button.update();
   }
 
+  if (game.state === GameState.VICTORY) {
+    ctx.fillStyle = "white";
+    ctx.font = `${map.tileSize}px sans-serif`;
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    ctx.fillText("You win!", canvas.width / 2, canvas.height / 2);
+    canvas.removeEventListener("mousemove", playingMousemoveHandler);
+    canvas.removeEventListener("click", playingClickHandler);
+  }
+
   if (game.state === GameState.PLAYING) {
     map.draw();
 
     if (enemies.length === 0) {
-      ctx.fillStyle = "white";
-      ctx.font = `${map.tileSize}px sans-serif`;
-      ctx.textBaseline = "middle";
-      ctx.textAlign = "center";
-      ctx.fillText("You win!", canvas.width / 2, canvas.height / 2);
-      canvas.removeEventListener("mousemove", playingMousemoveHandler);
-      canvas.removeEventListener("click", playingClickHandler);
+      game.state = GameState.VICTORY;
     }
 
     for (let i = 0; i < enemies.length; i++) {
@@ -167,14 +171,18 @@ function animate() {
     ctx.fillText(`Score: ${score}`, canvas.width - 20, 60);
 
     if (lives === 0) {
-      ctx.font = `${map.tileSize}px sans-serif`;
-      ctx.textBaseline = "middle";
-      ctx.textAlign = "center";
-      ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
-      cancelAnimationFrame(animationFrame);
-      canvas.removeEventListener("mousemove", playingMousemoveHandler);
-      canvas.removeEventListener("click", playingClickHandler);
+      game.state = GameState.GAMEOVER;
     }
+  }
+
+  if (game.state === GameState.GAMEOVER) {
+    ctx.font = `${map.tileSize}px sans-serif`;
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+    cancelAnimationFrame(animationFrame);
+    canvas.removeEventListener("mousemove", playingMousemoveHandler);
+    canvas.removeEventListener("click", playingClickHandler);
   }
 }
 
