@@ -9,10 +9,6 @@ class Button {
     this.hover = false;
   }
 
-  update() {
-    this.draw();
-  }
-
   draw() {
     ctx.fillStyle = this.hover ? "white" : "black";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);

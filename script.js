@@ -58,36 +58,7 @@ let step = 0;
 let animationFrame;
 const game = new Game();
 
-const titleText = new Text(
-  { x: canvas.width / 2, y: canvas.height / 2 - 130 },
-  "Tower Defense",
-  map.tileSize
-);
-const instructions1 = new Text(
-  { x: canvas.width / 2, y: canvas.height / 2 - 80 },
-  "Red enemies will follow the black path to the end of the screen. Yellow towers will try to kill them.",
-  map.tileSize / 4
-);
-const instructions2 = new Text(
-  { x: canvas.width / 2, y: canvas.height / 2 - 55 },
-  "Place towers by clicking on a grey tile. Towers cost 10 coins. Kill enemies to get 5 coins.",
-  map.tileSize / 4
-);
-const instructions3 = new Text(
-  { x: canvas.width / 2, y: canvas.height / 2 - 30 },
-  "If a tower makes it to the end, you will lose a life. Don't lose all your lives!",
-  map.tileSize / 4
-);
-const playButton = new Button(
-  {
-    x: canvas.width / 2 - 125,
-    y: canvas.height / 2,
-  },
-  250,
-  100,
-  "Play",
-  map.tileSize / 2
-);
+const readyScreen = new ReadyScreen(map);
 
 const victoryText = new Text(
   { x: canvas.width / 2, y: canvas.height / 2 },
@@ -106,14 +77,7 @@ function animate() {
   animationFrame = requestAnimationFrame(animate);
 
   if (game.state === GameState.READY) {
-    ctx.fillStyle = "grey";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    titleText.draw();
-    instructions1.draw();
-    instructions2.draw();
-    instructions3.draw();
-    playButton.update();
+    readyScreen.draw();
   }
 
   if (game.state === GameState.VICTORY) {
@@ -138,9 +102,9 @@ function animate() {
       }
 
       if (enemies[i].health <= 0) {
-        enemies.splice(i, 1);
         score++;
         coins += enemies[i].coins;
+        enemies.splice(i, 1);
       }
     }
 
@@ -205,33 +169,8 @@ const playingClickHandler = () => {
   }
 };
 
-const readyMousemoveHandler = (e) => {
-  const cursor = {
-    position: {
-      x: e.clientX,
-      y: e.clientY,
-    },
-    width: 1,
-    height: 1,
-  };
-
-  playButton.hover = Collision.rectRect(cursor, playButton);
-};
-
-const readyClickHandler = () => {
-  if (playButton.hover) {
-    game.state = GameState.PLAYING;
-    canvas.removeEventListener("mousemove", readyMousemoveHandler);
-    canvas.removeEventListener("click", readyClickHandler);
-    canvas.addEventListener("mousemove", playingMousemoveHandler);
-    canvas.addEventListener("click", playingClickHandler);
-  }
-};
-
 window.addEventListener("load", () => {
   game.state = GameState.READY;
-  canvas.addEventListener("mousemove", readyMousemoveHandler);
-  canvas.addEventListener("click", readyClickHandler);
 });
 
 animate();
