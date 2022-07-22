@@ -89,7 +89,7 @@ const enemies = [
 
 let step = 0;
 let animationFrame;
-const game = new Game(GameState.LOADING);
+const game = new Game();
 
 const titleText = new Text(
   { x: canvas.width / 2, y: canvas.height / 2 - 60 },

@@ -1,5 +1,5 @@
 class Game {
-  constructor(state) {
-    this.state = state;
+  constructor() {
+    this.state = GameState.LOADING;
   }
 }
