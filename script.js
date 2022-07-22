@@ -59,9 +59,24 @@ let animationFrame;
 const game = new Game();
 
 const titleText = new Text(
-  { x: canvas.width / 2, y: canvas.height / 2 - 60 },
+  { x: canvas.width / 2, y: canvas.height / 2 - 130 },
   "Tower Defense",
   map.tileSize
+);
+const instructions1 = new Text(
+  { x: canvas.width / 2, y: canvas.height / 2 - 80 },
+  "Red enemies will follow the black path to the end of the screen. Yellow towers will try to kill them.",
+  map.tileSize / 4
+);
+const instructions2 = new Text(
+  { x: canvas.width / 2, y: canvas.height / 2 - 55 },
+  "Place towers by clicking on a grey tile. Towers cost 10 coins. Kill enemies to get 5 coins.",
+  map.tileSize / 4
+);
+const instructions3 = new Text(
+  { x: canvas.width / 2, y: canvas.height / 2 - 30 },
+  "If a tower makes it to the end, you will lose a life. Don't lose all your lives!",
+  map.tileSize / 4
 );
 const playButton = new Button(
   {
@@ -95,6 +110,9 @@ function animate() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     titleText.draw();
+    instructions1.draw();
+    instructions2.draw();
+    instructions3.draw();
     playButton.update();
   }
 
