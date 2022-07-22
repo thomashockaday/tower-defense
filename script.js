@@ -89,7 +89,12 @@ let step = 0;
 let animationFrame;
 const game = new Game(GameState.LOADING);
 
-const button = new Button(
+const titleText = new Text(
+  { x: canvas.width / 2, y: canvas.height / 2 - 60 },
+  "Tower Defense",
+  map.tileSize
+);
+const playButton = new Button(
   {
     x: canvas.width / 2 - 125,
     y: canvas.height / 2,
@@ -100,6 +105,18 @@ const button = new Button(
   map.tileSize / 2
 );
 
+const victoryText = new Text(
+  { x: canvas.width / 2, y: canvas.height / 2 },
+  "You win!",
+  map.tileSize
+);
+
+const gameOverText = new Text(
+  { x: canvas.width / 2, y: canvas.height / 2 },
+  "Game Over",
+  map.tileSize
+);
+
 function animate() {
   step++;
   animationFrame = requestAnimationFrame(animate);
@@ -108,21 +125,12 @@ function animate() {
     ctx.fillStyle = "grey";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "white";
-    ctx.font = `${map.tileSize}px sans-serif`;
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "center";
-    ctx.fillText("Tower Defense", canvas.width / 2, canvas.height / 2 - 60);
-
-    button.update();
+    titleText.draw();
+    playButton.update();
   }
 
   if (game.state === GameState.VICTORY) {
-    ctx.fillStyle = "white";
-    ctx.font = `${map.tileSize}px sans-serif`;
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "center";
-    ctx.fillText("You win!", canvas.width / 2, canvas.height / 2);
+    victoryText.draw();
     canvas.removeEventListener("mousemove", playingMousemoveHandler);
     canvas.removeEventListener("click", playingClickHandler);
   }
@@ -176,10 +184,7 @@ function animate() {
   }
 
   if (game.state === GameState.GAMEOVER) {
-    ctx.font = `${map.tileSize}px sans-serif`;
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "center";
-    ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+    gameOverText.draw();
     cancelAnimationFrame(animationFrame);
     canvas.removeEventListener("mousemove", playingMousemoveHandler);
     canvas.removeEventListener("click", playingClickHandler);
@@ -221,11 +226,11 @@ const readyMousemoveHandler = (e) => {
     height: 1,
   };
 
-  button.hover = Collision.rectRect(cursor, button);
+  playButton.hover = Collision.rectRect(cursor, playButton);
 };
 
 const readyClickHandler = () => {
-  if (button.hover) {
+  if (playButton.hover) {
     game.state = GameState.PLAYING;
     canvas.removeEventListener("mousemove", readyMousemoveHandler);
     canvas.removeEventListener("click", readyClickHandler);
