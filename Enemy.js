@@ -1,9 +1,9 @@
 class Enemy {
-  constructor(position, map) {
+  constructor(position, size, path) {
     this.position = position;
-    this.map = map;
-    this.width = map.tileSize;
-    this.height = map.tileSize;
+    this.width = size;
+    this.height = size;
+    this.path = path;;
 
     this.currentDirection = null;
     this.nextDirection = null;
@@ -58,28 +58,28 @@ class Enemy {
     }
 
     if (
-      this.map.tiles[flooredCurrentTileY - 1][flooredCurrentTileX] === 1 &&
+      this.path[flooredCurrentTileY - 1][flooredCurrentTileX] === 1 &&
       this.currentDirection !== "down"
     ) {
       return "up";
     }
 
     if (
-      this.map.tiles[flooredCurrentTileY][flooredCurrentTileX + 1] === 1 &&
+      this.path[flooredCurrentTileY][flooredCurrentTileX + 1] === 1 &&
       this.currentDirection !== "left"
     ) {
       return "right";
     }
 
     if (
-      this.map.tiles[flooredCurrentTileY + 1][flooredCurrentTileX] === 1 &&
+      this.path[flooredCurrentTileY + 1][flooredCurrentTileX] === 1 &&
       this.currentDirection !== "up"
     ) {
       return "down";
     }
 
     if (
-      this.map.tiles[flooredCurrentTileY][flooredCurrentTileX - 1] === 1 &&
+      this.path[flooredCurrentTileY][flooredCurrentTileX - 1] === 1 &&
       this.currentDirection !== "right"
     ) {
       return "left";

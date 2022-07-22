@@ -42,50 +42,17 @@ let hoverTile = new HoverTile(
   map.tileSize
 );
 
-const enemies = [
-  new Enemy(
-    {
-      x: -map.tileSize,
-      y: firstPathTilePosition * map.tileSize,
-    },
-    map
-  ),
-  new Enemy(
-    {
-      x: -map.tileSize * 3,
-      y: firstPathTilePosition * map.tileSize,
-    },
-    map
-  ),
-  new Enemy(
-    {
-      x: -map.tileSize * 5,
-      y: firstPathTilePosition * map.tileSize,
-    },
-    map
-  ),
-  new Enemy(
-    {
-      x: -map.tileSize * 7,
-      y: firstPathTilePosition * map.tileSize,
-    },
-    map
-  ),
-  new Enemy(
-    {
-      x: -map.tileSize * 9,
-      y: firstPathTilePosition * map.tileSize,
-    },
-    map
-  ),
-  new Enemy(
-    {
-      x: -map.tileSize * 11,
-      y: firstPathTilePosition * map.tileSize,
-    },
-    map
-  ),
-];
+const enemies = [];
+
+for (let i = 1; i <= 33; i += 2) {
+  enemies.push(
+    new Enemy(
+      { x: -map.tileSize * i, y: firstPathTilePosition * map.tileSize },
+      map.tileSize,
+      map.tiles
+    )
+  );
+}
 
 let step = 0;
 let animationFrame;
