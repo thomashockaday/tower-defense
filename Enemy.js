@@ -8,7 +8,8 @@ class Enemy {
     this.currentDirection = null;
     this.nextDirection = null;
     this.speed = 4;
-    this.health = 5;
+    this.health = 3;
+    this.coins = 5;
   }
 
   update() {

@@ -32,6 +32,8 @@ const firstPathTilePosition = firstPathTile.indexOf(1);
 
 let lives = 3;
 let score = 0;
+let coins = 10;
+
 let hoverTile = new HoverTile(
   {
     x: -1,
@@ -153,6 +155,7 @@ function animate() {
       if (enemies[i].health <= 0) {
         enemies.splice(i, 1);
         score++;
+        coins += enemies[i].coins;
       }
     }
 
@@ -177,6 +180,7 @@ function animate() {
     ctx.textAlign = "right";
     ctx.fillText(`Lives: ${lives}`, canvas.width - 20, 20);
     ctx.fillText(`Score: ${score}`, canvas.width - 20, 60);
+    ctx.fillText(`Coins: ${coins}`, canvas.width - 20, 100);
 
     if (lives === 0) {
       game.state = GameState.GAMEOVER;
@@ -199,20 +203,20 @@ const playingMousemoveHandler = (e) => {
 };
 
 const playingClickHandler = () => {
-  if (map.canPlaceTower(hoverTile.currentTile)) {
-    map.tiles[hoverTile.currentTile.y][hoverTile.currentTile.x] = 2;
+  const tower = new Tower(
+    {
+      x: hoverTile.position.x,
+      y: hoverTile.position.y,
+    },
+    map.tileSize,
+    map.tileSize,
+    5
+  );
 
-    map.towers.push(
-      new Tower(
-        {
-          x: hoverTile.position.x,
-          y: hoverTile.position.y,
-        },
-        map.tileSize,
-        map.tileSize,
-        5
-      )
-    );
+  if (map.canPlaceTower(hoverTile.currentTile) && coins >= tower.cost) {
+    map.tiles[hoverTile.currentTile.y][hoverTile.currentTile.x] = 2;
+    map.towers.push(tower);
+    coins -= tower.cost;
   }
 };
 

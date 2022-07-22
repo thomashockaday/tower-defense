@@ -16,6 +16,7 @@ class Tower {
     this.cooldown = 20;
     this.bullets = [];
     this.maxBullets = 2;
+    this.cost = 10;
   }
 
   update(step, enemies) {
