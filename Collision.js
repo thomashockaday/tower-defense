@@ -4,7 +4,7 @@ class Collision {
       first.position.x >= second.position.x &&
       first.position.x + first.width <= second.position.x + second.width &&
       first.position.y >= second.position.y &&
-      first.position.y + first.height <= second.position.y + second.width
+      first.position.y + first.height <= second.position.y + second.height
     );
   }
 

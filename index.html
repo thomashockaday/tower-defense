@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tower Defense</title>
-    <style type="text/css">
-      canvas {
-        display: block;
-      }
-    </style>
+    <meta
+      name="description"
+      content="A simple tower defense game made with vanilla JS and HTML canvas"
+    />
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <canvas></canvas>
+    <p class="screen-warning">
+      Please use a larger screen to fully enjoy this game.
+    </p>
+    <canvas>Your browser does not support canvas elements.</canvas>
 
     <script src="Bullet.js"></script>
     <script src="Collision.js"></script>
     <script src="Enemy.js"></script>
+    <script src="Game.js"></script>
+    <script src="GameState.js"></script>
     <script src="HoverTile.js"></script>
     <script src="Map.js"></script>
     <script src="Tower.js"></script>
+    <script src="Interface/Button.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
