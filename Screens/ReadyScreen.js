@@ -1,5 +1,5 @@
 class ReadyScreen {
-  constructor(map, game) {
+  constructor(map) {
     this.titleText = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 - 130 },
       "Tower Defense",
@@ -16,7 +16,7 @@ class ReadyScreen {
       map.tileSize / 4
     );
     this.instructions3 = new Text(
-      { x: canvas.width / 2, y: canvas.height / 2 - 40 },
+      { x: canvas.width / 2, y: canvas.height / 2 - 30 },
       "If a tower makes it to the end, you will lose a life. Don't lose all your lives!",
       map.tileSize / 4
     );
@@ -35,8 +35,10 @@ class ReadyScreen {
       this.#mousemoveHandler(e);
     });
     canvas.addEventListener("click", () => {
-      this.#clickHandler(game);
+      this.#clickHandler();
     });
+
+    this.finished = false;
   }
 
   draw() {
@@ -46,7 +48,7 @@ class ReadyScreen {
     this.titleText.draw();
     this.instructions1.draw();
     this.instructions2.draw();
-    this.instructions2.draw();
+    this.instructions3.draw();
     this.playButton.draw();
   }
 
@@ -63,11 +65,11 @@ class ReadyScreen {
     this.playButton.hover = Collision.rectRect(cursor, this.playButton);
   }
 
-  #clickHandler(game) {
-    if (playButton.hover) {
-      game.state = GameState.PLAYING;
-      canvas.removeEventListener("mousemove", readyMousemoveHandler);
-      canvas.removeEventListener("click", readyClickHandler);
+  #clickHandler() {
+    if (this.playButton.hover) {
+      this.finished = true;
+      canvas.removeEventListener("mousemove", this.#mousemoveHandler);
+      canvas.removeEventListener("click", this.#clickHandler);
       canvas.addEventListener("mousemove", playingMousemoveHandler);
       canvas.addEventListener("click", playingClickHandler);
     }

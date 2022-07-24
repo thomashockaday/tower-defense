@@ -54,6 +54,30 @@ for (let i = 1; i <= 33; i += 2) {
   );
 }
 
+const livesText = new Text(
+  { x: canvas.width - 20, y: 20 },
+  `Lives: ${lives}`,
+  map.tileSize / 2,
+  "top",
+  "right"
+);
+
+const scoreText = new Text(
+  { x: canvas.width - 20, y: 60 },
+  `Score: ${score}`,
+  map.tileSize / 2,
+  "top",
+  "right"
+);
+
+const coinsText = new Text(
+  { x: canvas.width - 20, y: 100 },
+  `Coins: ${coins}`,
+  map.tileSize / 2,
+  "top",
+  "right"
+);
+
 let step = 0;
 let animationFrame;
 const game = new Game();
@@ -75,6 +99,10 @@ const gameOverText = new Text(
 function animate() {
   step++;
   animationFrame = requestAnimationFrame(animate);
+
+  if (readyScreen.finished) {
+    game.state = GameState.PLAYING;
+  }
 
   if (game.state === GameState.READY) {
     readyScreen.draw();
@@ -123,13 +151,13 @@ function animate() {
 
     hoverTile.update();
 
-    ctx.fillStyle = "white";
-    ctx.font = `${map.tileSize / 2}px sans-serif`;
-    ctx.textBaseline = "top";
-    ctx.textAlign = "right";
-    ctx.fillText(`Lives: ${lives}`, canvas.width - 20, 20);
-    ctx.fillText(`Score: ${score}`, canvas.width - 20, 60);
-    ctx.fillText(`Coins: ${coins}`, canvas.width - 20, 100);
+    livesText.text = `Lives: ${lives}`;
+    scoreText.text = `Score: ${score}`;
+    coinsText.text = `Coins: ${coins}`;
+
+    livesText.draw();
+    scoreText.draw();
+    coinsText.draw();
 
     if (lives === 0) {
       game.state = GameState.GAMEOVER;
