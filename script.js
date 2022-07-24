@@ -99,12 +99,7 @@ const game = new Game();
 
 const gameOverScreen = new GameOverScreen(map);
 const readyScreen = new ReadyScreen(map);
-
-const victoryText = new Text(
-  { x: canvas.width / 2, y: canvas.height / 2 },
-  "You win!",
-  map.tileSize
-);
+const victoryScreen = new VictoryScreen(map);
 
 function animate() {
   step++;
@@ -126,7 +121,7 @@ function animate() {
   }
 
   if (game.state === GameState.VICTORY) {
-    victoryText.draw();
+    victoryScreen.draw();
     canvas.removeEventListener("mousemove", playingMousemoveHandler);
     canvas.removeEventListener("click", playingClickHandler);
   }
