@@ -97,17 +97,12 @@ let step = 0;
 let animationFrame;
 const game = new Game();
 
+const gameOverScreen = new GameOverScreen(map);
 const readyScreen = new ReadyScreen(map);
 
 const victoryText = new Text(
   { x: canvas.width / 2, y: canvas.height / 2 },
   "You win!",
-  map.tileSize
-);
-
-const gameOverText = new Text(
-  { x: canvas.width / 2, y: canvas.height / 2 },
-  "Game Over",
   map.tileSize
 );
 
@@ -121,6 +116,13 @@ function animate() {
 
   if (game.state === GameState.READY) {
     readyScreen.draw();
+  }
+
+  if (game.state === GameState.GAMEOVER) {
+    gameOverScreen.draw();
+    cancelAnimationFrame(animationFrame);
+    canvas.removeEventListener("mousemove", playingMousemoveHandler);
+    canvas.removeEventListener("click", playingClickHandler);
   }
 
   if (game.state === GameState.VICTORY) {
@@ -189,13 +191,6 @@ function animate() {
     if (lives === 0) {
       game.state = GameState.GAMEOVER;
     }
-  }
-
-  if (game.state === GameState.GAMEOVER) {
-    gameOverText.draw();
-    cancelAnimationFrame(animationFrame);
-    canvas.removeEventListener("mousemove", playingMousemoveHandler);
-    canvas.removeEventListener("click", playingClickHandler);
   }
 }
 
