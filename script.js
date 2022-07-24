@@ -118,6 +118,7 @@ function animate() {
     cancelAnimationFrame(animationFrame);
     canvas.removeEventListener("mousemove", playingMousemoveHandler);
     canvas.removeEventListener("click", playingClickHandler);
+    return;
   }
 
   if (game.state === GameState.VICTORY) {
@@ -130,11 +131,14 @@ function animate() {
     map.draw();
 
     if (waves[wave].enemies.length === 0) {
+      waves[wave].finished = true;
       wave++;
 
       if (wave >= waves.length) {
         game.state = GameState.VICTORY;
         return;
+      } else {
+        waves[wave].started = true;
       }
     }
 
