@@ -100,7 +100,7 @@ function animate() {
   step++;
   animationFrame = requestAnimationFrame(animate);
 
-  if (readyScreen.finished) {
+  if (readyScreen.finished && game.state === GameState.READY) {
     game.state = GameState.PLAYING;
   }
 
