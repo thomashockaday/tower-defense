@@ -34,8 +34,11 @@ let lives = 3;
 let score = 0;
 let coins = 10;
 
-let wave = 1;
-let waves = [new Wave([])];
+let wave = 0;
+let waves = [];
+
+const timeBetweenWaves = 5;
+let countdownToNextWave = 0;
 
 for (let i = 0; i < 2; i++) {
   const enemies = [];
@@ -71,7 +74,7 @@ const waveText = new Text(
 
 const livesText = new Text(
   { x: canvas.width - 20, y: 60 },
-  `Lives: ${lives}`,
+  "",
   map.tileSize / 2,
   "top",
   "right"
@@ -79,7 +82,7 @@ const livesText = new Text(
 
 const scoreText = new Text(
   { x: canvas.width - 20, y: 100 },
-  `Score: ${score}`,
+  "",
   map.tileSize / 2,
   "top",
   "right"
@@ -87,10 +90,18 @@ const scoreText = new Text(
 
 const coinsText = new Text(
   { x: canvas.width - 20, y: 140 },
-  `Coins: ${coins}`,
+  "",
   map.tileSize / 2,
   "top",
   "right"
+);
+
+const countdownToNextWaveText = new Text(
+  { x: 20, y: 20 },
+  "",
+  map.tileSize / 2,
+  "top",
+  "left"
 );
 
 let step = 0;
@@ -137,24 +148,17 @@ function animate() {
       if (wave >= waves.length) {
         game.state = GameState.VICTORY;
         return;
-      } else {
-        waves[wave].started = true;
       }
+
+      countdownToNextWave = timeBetweenWaves;
     }
 
-    for (let i = 0; i < waves[wave].enemies.length; i++) {
-      waves[wave].enemies[i].update();
+    if (countdownToNextWave > 0 && step % 60 === 0) {
+      countdownToNextWave--;
+    }
 
-      if (waves[wave].enemies[i].position.x >= canvas.width) {
-        waves[wave].enemies.splice(i, 1);
-        lives--;
-      }
-
-      if (waves[wave].enemies[i].health <= 0) {
-        score++;
-        coins += waves[wave].enemies[i].coins;
-        waves[wave].enemies.splice(i, 1);
-      }
+    if (countdownToNextWave <= 0) {
+      waves[wave].update();
     }
 
     for (let i = 0; i < map.towers.length; i++) {
@@ -177,15 +181,17 @@ function animate() {
 
     hoverTile.update();
 
-    waveText.text = `Wave: ${wave}`;
+    waveText.text = `Wave: ${wave + 1}`;
     livesText.text = `Lives: ${lives}`;
     scoreText.text = `Score: ${score}`;
     coinsText.text = `Coins: ${coins}`;
+    countdownToNextWaveText.text = `Next wave in: ${countdownToNextWave}`;
 
     waveText.draw();
     livesText.draw();
     scoreText.draw();
     coinsText.draw();
+    countdownToNextWaveText.draw();
 
     if (lives === 0) {
       game.state = GameState.GAMEOVER;
