@@ -31,14 +31,17 @@ class ReadyScreen {
       map.tileSize / 2
     );
 
-    canvas.addEventListener("mousemove", (e) => {
-      this.#mousemoveHandler(e);
-    });
-    canvas.addEventListener("click", () => {
-      this.#clickHandler();
-    });
-
     this.finished = false;
+  }
+
+  update() {
+    if (this.playButton.clicked) {
+      this.finished = true;
+      canvas.addEventListener("mousemove", playingMousemoveHandler);
+      canvas.addEventListener("click", playingClickHandler);
+    }
+
+    this.draw();
   }
 
   draw() {
@@ -50,28 +53,5 @@ class ReadyScreen {
     this.instructions2.draw();
     this.instructions3.draw();
     this.playButton.draw();
-  }
-
-  #mousemoveHandler(e) {
-    const cursor = {
-      position: {
-        x: e.clientX,
-        y: e.clientY,
-      },
-      width: 1,
-      height: 1,
-    };
-
-    this.playButton.hover = Collision.rectRect(cursor, this.playButton);
-  }
-
-  #clickHandler() {
-    if (this.playButton.hover) {
-      this.finished = true;
-      canvas.removeEventListener("mousemove", this.#mousemoveHandler);
-      canvas.removeEventListener("click", this.#clickHandler);
-      canvas.addEventListener("mousemove", playingMousemoveHandler);
-      canvas.addEventListener("click", playingClickHandler);
-    }
   }
 }

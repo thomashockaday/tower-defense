@@ -110,7 +110,7 @@ function animate() {
   }
 
   if (game.state === GameState.READY) {
-    readyScreen.draw();
+    readyScreen.update();
   }
 
   if (game.state === GameState.GAMEOVER) {

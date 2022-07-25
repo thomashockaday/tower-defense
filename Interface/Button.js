@@ -7,6 +7,14 @@ class Button {
     this.height = height;
 
     this.hover = false;
+    this.clicked = false;
+
+    canvas.addEventListener("mousemove", (e) => {
+      this.#mousemoveHandler(e);
+    });
+    canvas.addEventListener("click", () => {
+      this.#clickHandler();
+    });
   }
 
   draw() {
@@ -22,5 +30,26 @@ class Button {
       this.position.x + this.width / 2,
       this.position.y + this.height / 2
     );
+  }
+
+  #mousemoveHandler(e) {
+    const cursor = {
+      position: {
+        x: e.clientX,
+        y: e.clientY,
+      },
+      width: 1,
+      height: 1,
+    };
+
+    this.hover = Collision.rectRect(cursor, this);
+  }
+
+  #clickHandler() {
+    if (this.hover) {
+      this.clicked = true;
+      canvas.removeEventListener("mousemove", this.#mousemoveHandler);
+      canvas.removeEventListener("click", this.#clickHandler);
+    }
   }
 }
