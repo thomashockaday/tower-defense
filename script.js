@@ -37,10 +37,10 @@ let coins = 10;
 let wave = 0;
 let waves = [];
 
-const timeBetweenWaves = 5;
+const timeBetweenWaves = 359;
 let countdownToNextWave = 0;
 
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 3; i++) {
   const enemies = [];
 
   for (let j = 1; j <= 33; j += 2) {
@@ -109,7 +109,7 @@ function animate() {
       countdownToNextWave = timeBetweenWaves;
     }
 
-    if (countdownToNextWave > 0 && step % 60 === 0) {
+    if (countdownToNextWave > 0) {
       countdownToNextWave--;
     }
 
@@ -139,7 +139,11 @@ function animate() {
     playingScreen.livesText.text = `Lives: ${lives}`;
     playingScreen.scoreText.text = `Score: ${score}`;
     playingScreen.coinsText.text = `Coins: ${coins}`;
-    playingScreen.countdownToNextWaveText.text = `Next wave in: ${countdownToNextWave}`;
+
+    playingScreen.countdownToNextWaveText.text =
+      countdownToNextWave > 0
+        ? `Next wave in: ${Math.floor(countdownToNextWave / 60)}`
+        : "";
 
     playingScreen.update();
 
