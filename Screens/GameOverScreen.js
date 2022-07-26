@@ -7,6 +7,10 @@ class GameOverScreen {
     );
   }
 
+  update() {
+    this.draw();
+  }
+
   draw() {
     this.gameOverText.draw();
   }

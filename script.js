@@ -56,60 +56,14 @@ for (let i = 0; i < 2; i++) {
   waves.push(new Wave(enemies));
 }
 
-let hoverTile = new HoverTile(
-  {
-    x: -1,
-    y: -1,
-  },
-  map.tileSize
-);
-
-const waveText = new Text(
-  { x: canvas.width - 20, y: 20 },
-  `Wave: ${wave}`,
-  map.tileSize / 2,
-  "top",
-  "right"
-);
-
-const livesText = new Text(
-  { x: canvas.width - 20, y: 60 },
-  "",
-  map.tileSize / 2,
-  "top",
-  "right"
-);
-
-const scoreText = new Text(
-  { x: canvas.width - 20, y: 100 },
-  "",
-  map.tileSize / 2,
-  "top",
-  "right"
-);
-
-const coinsText = new Text(
-  { x: canvas.width - 20, y: 140 },
-  "",
-  map.tileSize / 2,
-  "top",
-  "right"
-);
-
-const countdownToNextWaveText = new Text(
-  { x: 20, y: 20 },
-  "",
-  map.tileSize / 2,
-  "top",
-  "left"
-);
-
 let step = 0;
 let animationFrame;
 const game = new Game();
 
 const gameOverScreen = new GameOverScreen(map);
-const readyScreen = new ReadyScreen(map);
+const loadingScreen = new LoadingScreen(map);
+const playingScreen = new PlayingScreen(map);
+const readyScreen = new ReadyScreen(map, playingScreen);
 const victoryScreen = new VictoryScreen(map);
 
 function animate() {
@@ -124,18 +78,20 @@ function animate() {
     readyScreen.update();
   }
 
+  if (game.state === GameState.LOADING) {
+    loadingScreen.update();
+  }
+
   if (game.state === GameState.GAMEOVER) {
-    gameOverScreen.draw();
+    gameOverScreen.update();
     cancelAnimationFrame(animationFrame);
-    canvas.removeEventListener("mousemove", playingMousemoveHandler);
-    canvas.removeEventListener("click", playingClickHandler);
+    playingScreen.removeEventListeners();
     return;
   }
 
   if (game.state === GameState.VICTORY) {
-    victoryScreen.draw();
-    canvas.removeEventListener("mousemove", playingMousemoveHandler);
-    canvas.removeEventListener("click", playingClickHandler);
+    victoryScreen.update();
+    playingScreen.removeEventListeners();
   }
 
   if (game.state === GameState.PLAYING) {
@@ -179,19 +135,13 @@ function animate() {
       }
     }
 
-    hoverTile.update();
+    playingScreen.waveText.text = `Wave: ${wave + 1}`;
+    playingScreen.livesText.text = `Lives: ${lives}`;
+    playingScreen.scoreText.text = `Score: ${score}`;
+    playingScreen.coinsText.text = `Coins: ${coins}`;
+    playingScreen.countdownToNextWaveText.text = `Next wave in: ${countdownToNextWave}`;
 
-    waveText.text = `Wave: ${wave + 1}`;
-    livesText.text = `Lives: ${lives}`;
-    scoreText.text = `Score: ${score}`;
-    coinsText.text = `Coins: ${coins}`;
-    countdownToNextWaveText.text = `Next wave in: ${countdownToNextWave}`;
-
-    waveText.draw();
-    livesText.draw();
-    scoreText.draw();
-    coinsText.draw();
-    countdownToNextWaveText.draw();
+    playingScreen.update();
 
     if (lives === 0) {
       game.state = GameState.GAMEOVER;
@@ -199,33 +149,9 @@ function animate() {
   }
 }
 
-const playingMousemoveHandler = (e) => {
-  hoverTile.position = {
-    x: Math.floor(e.clientX / map.tileSize) * map.tileSize,
-    y: Math.floor(e.clientY / map.tileSize) * map.tileSize,
-  };
-};
-
-const playingClickHandler = () => {
-  const tower = new Tower(
-    {
-      x: hoverTile.position.x,
-      y: hoverTile.position.y,
-    },
-    map.tileSize,
-    map.tileSize,
-    5
-  );
-
-  if (map.canPlaceTower(hoverTile.currentTile) && coins >= tower.cost) {
-    map.tiles[hoverTile.currentTile.y][hoverTile.currentTile.x] = 2;
-    map.towers.push(tower);
-    coins -= tower.cost;
-  }
-};
-
 window.addEventListener("load", () => {
   game.state = GameState.READY;
+  readyScreen.addEventListeners();
 });
 
 animate();

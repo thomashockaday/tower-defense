@@ -8,13 +8,6 @@ class Button {
 
     this.hover = false;
     this.clicked = false;
-
-    canvas.addEventListener("mousemove", (e) => {
-      this.#mousemoveHandler(e);
-    });
-    canvas.addEventListener("click", () => {
-      this.#clickHandler();
-    });
   }
 
   draw() {
@@ -30,6 +23,20 @@ class Button {
       this.position.x + this.width / 2,
       this.position.y + this.height / 2
     );
+  }
+
+  addEventListeners() {
+    canvas.addEventListener("mousemove", (e) => {
+      this.#mousemoveHandler(e);
+    });
+    canvas.addEventListener("click", () => {
+      this.#clickHandler();
+    });
+  }
+
+  removeEventListeners() {
+    canvas.removeEventListener("mousemove", this.#mousemoveHandler);
+    canvas.removeEventListener("click", this.#clickHandler);
   }
 
   #mousemoveHandler(e) {
@@ -48,8 +55,7 @@ class Button {
   #clickHandler() {
     if (this.hover) {
       this.clicked = true;
-      canvas.removeEventListener("mousemove", this.#mousemoveHandler);
-      canvas.removeEventListener("click", this.#clickHandler);
+      this.removeEventListeners();
     }
   }
 }

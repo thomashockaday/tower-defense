@@ -1,5 +1,7 @@
 class ReadyScreen {
-  constructor(map) {
+  constructor(map, nextScreen) {
+    this.nextScreen = nextScreen;
+
     this.titleText = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 - 130 },
       "Tower Defense",
@@ -31,14 +33,14 @@ class ReadyScreen {
       map.tileSize / 2
     );
 
+    this.hasEventListeners = false;
     this.finished = false;
   }
 
   update() {
     if (this.playButton.clicked) {
       this.finished = true;
-      canvas.addEventListener("mousemove", playingMousemoveHandler);
-      canvas.addEventListener("click", playingClickHandler);
+      this.nextScreen.addEventListeners();
     }
 
     this.draw();
@@ -53,5 +55,12 @@ class ReadyScreen {
     this.instructions2.draw();
     this.instructions3.draw();
     this.playButton.draw();
+  }
+
+  addEventListeners() {
+    if (!this.hasEventListeners) {
+      this.playButton.addEventListeners();
+      this.hasEventListeners = true;
+    }
   }
 }
