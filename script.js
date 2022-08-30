@@ -38,7 +38,7 @@ let wave = 0;
 let waves = [];
 
 const timeBetweenWaves = 359;
-let countdownToNextWave = 0;
+let countdownToNextWave = timeBetweenWaves;
 
 for (let i = 0; i < 3; i++) {
   const enemies = [];
