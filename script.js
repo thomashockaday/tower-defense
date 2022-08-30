@@ -4,12 +4,12 @@ const ctx = canvas.getContext("2d");
 const level = new BasicLevel();
 const map = new Map(level.tiles);
 
-const sidebar = new Sidebar({ x: level.tiles[0].length * map.tileSize, y: 0 });
+const sidebar = new Sidebar({ x: map.tiles[0].length * map.tileSize, y: 0 });
 
-canvas.width = level.tiles[0].length * map.tileSize + sidebar.width;
-canvas.height = level.tiles.length * map.tileSize;
+canvas.width = map.tiles[0].length * map.tileSize + sidebar.width;
+canvas.height = map.tiles.length * map.tileSize;
 
-const firstPathTile = level.tiles.map((tile) => tile[0]);
+const firstPathTile = map.tiles.map((tile) => tile[0]);
 const firstPathTilePosition = firstPathTile.indexOf(1);
 
 let lives = 3;
