@@ -1,10 +1,10 @@
 class Collision {
   static rectRect(first, second) {
     return (
-      first.position.x >= second.position.x &&
-      first.position.x + first.width <= second.position.x + second.width &&
-      first.position.y >= second.position.y &&
-      first.position.y + first.height <= second.position.y + second.height
+      first.position.x < second.position.x + second.width &&
+      first.position.x + first.width > second.position.x &&
+      first.position.y < second.position.y + second.height &&
+      first.position.y + first.height > second.position.y
     );
   }
 
