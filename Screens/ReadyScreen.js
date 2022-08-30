@@ -9,17 +9,17 @@ class ReadyScreen {
     );
     this.instructions1 = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 - 80 },
-      "Red enemies will follow the black path to the end of the screen. Yellow towers will try to kill them.",
+      "Enemies will follow the path to the goal at the other end of the screen. Towers will try to kill them.",
       map.tileSize / 4
     );
     this.instructions2 = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 - 55 },
-      "Place towers by clicking on a grey tile. Towers cost 10 coins. Kill enemies to get 5 coins.",
+      "Place towers by clicking on an empty tile. Towers cost 10 coins. Kill enemies to get 5 coins.",
       map.tileSize / 4
     );
     this.instructions3 = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 - 30 },
-      "If a tower makes it to the end, you will lose a life. Don't lose all your lives!",
+      "If a tower makes it to the goal, you will lose a life. Don't lose all your lives!",
       map.tileSize / 4
     );
     this.playButton = new Button(

@@ -44,7 +44,7 @@ class Tower {
   }
 
   draw() {
-    ctx.fillStyle = "yellow";
+    ctx.fillStyle = "#ebc90f";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     ctx.fillStyle = "#FFFF0011";

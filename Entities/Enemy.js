@@ -36,7 +36,7 @@ class Enemy {
   }
 
   draw() {
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "#c20102";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 
