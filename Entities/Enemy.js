@@ -3,7 +3,7 @@ class Enemy {
     this.position = position;
     this.width = size;
     this.height = size;
-    this.path = path;;
+    this.path = path;
 
     this.currentDirection = null;
     this.nextDirection = null;
