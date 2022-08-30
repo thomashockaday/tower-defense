@@ -1,6 +1,7 @@
 class Wave {
-  constructor(enemies) {
+  constructor(enemies, goal) {
     this.enemies = enemies;
+    this.goal = goal;
 
     this.finished = false;
   }
@@ -9,7 +10,7 @@ class Wave {
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].update();
 
-      if (this.enemies[i].position.x >= canvas.width) {
+      if (Collision.rectRect(this.enemies[i], this.goal)) {
         this.enemies.splice(i, 1);
         lives--;
       }

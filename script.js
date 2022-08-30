@@ -1,33 +1,15 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-/**
- * Key:
- * 0: Blank
- * 1: Path
- * 2: Basic Tower
- */
-const tiles = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0],
-  [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
+const level = new BasicLevel();
+const map = new Map(level.tiles);
 
-const map = new Map(tiles);
+const sidebar = new Sidebar({ x: level.tiles[0].length * map.tileSize, y: 0 });
 
-canvas.width = map.tiles[0].length * map.tileSize;
-canvas.height = map.tiles.length * map.tileSize;
+canvas.width = level.tiles[0].length * map.tileSize + sidebar.width;
+canvas.height = level.tiles.length * map.tileSize;
 
-const firstPathTile = map.tiles.map((tile) => tile[0]);
+const firstPathTile = level.tiles.map((tile) => tile[0]);
 const firstPathTilePosition = firstPathTile.indexOf(1);
 
 let lives = 3;
@@ -53,7 +35,7 @@ for (let i = 0; i < 3; i++) {
     );
   }
 
-  waves.push(new Wave(enemies));
+  waves.push(new Wave(enemies, map.goal));
 }
 
 let step = 0;
@@ -69,6 +51,8 @@ const victoryScreen = new VictoryScreen(map);
 function animate() {
   step++;
   animationFrame = requestAnimationFrame(animate);
+
+  sidebar.draw();
 
   if (readyScreen.finished && game.state === GameState.READY) {
     game.state = GameState.PLAYING;
