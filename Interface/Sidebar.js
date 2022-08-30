@@ -5,7 +5,7 @@ class Sidebar {
   }
 
   draw() {
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "#01962e";
     ctx.fillRect(this.position.x, this.position.y, this.width, 768);
   }
 }

@@ -16,7 +16,7 @@ class Map {
             fillStyle = "#d1c99a";
             break;
           case 3:
-            fillStyle = "d35400";
+            fillStyle = "#d35400";
             break;
         }
 
