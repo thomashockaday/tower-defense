@@ -1,12 +1,13 @@
-class PlayingScreen {
+class PlayingScreen extends AbstractScreen {
   constructor(map, sidebar) {
-    this.map = map;
+    super(map);
+
     this.sidebar = sidebar;
 
     this.countdownToNextWaveText = new Text(
       { x: this.sidebar.position.x + this.sidebar.width / 2, y: 20 },
       "",
-      map.tileSize / 3,
+      this.map.tileSize / 3,
       "top",
       "center"
     );
@@ -14,7 +15,7 @@ class PlayingScreen {
     this.waveText = new Text(
       { x: this.sidebar.position.x + 20, y: 70 },
       "",
-      map.tileSize / 3,
+      this.map.tileSize / 3,
       "top",
       "left"
     );
@@ -22,7 +23,7 @@ class PlayingScreen {
     this.livesText = new Text(
       { x: this.sidebar.position.x + 20, y: 100 },
       "",
-      map.tileSize / 3,
+      this.map.tileSize / 3,
       "top",
       "left"
     );
@@ -30,7 +31,7 @@ class PlayingScreen {
     this.scoreText = new Text(
       { x: this.sidebar.position.x + 20, y: 130 },
       "",
-      map.tileSize / 3,
+      this.map.tileSize / 3,
       "top",
       "left"
     );
@@ -38,7 +39,7 @@ class PlayingScreen {
     this.coinsText = new Text(
       { x: this.sidebar.position.x + 20, y: 160 },
       "",
-      map.tileSize / 3,
+      this.map.tileSize / 3,
       "top",
       "left"
     );
@@ -48,7 +49,7 @@ class PlayingScreen {
         x: -1,
         y: -1,
       },
-      map.tileSize
+      this.map.tileSize
     );
 
     this.hasEventListeners = false;
