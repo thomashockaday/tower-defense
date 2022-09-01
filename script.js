@@ -47,15 +47,13 @@ const game = new Game();
 
 const gameOverScreen = new GameOverScreen(map);
 const loadingScreen = new LoadingScreen(map);
-const playingScreen = new PlayingScreen(map);
+const playingScreen = new PlayingScreen(map, sidebar);
 const readyScreen = new ReadyScreen(map, playingScreen);
 const victoryScreen = new VictoryScreen(map);
 
 function animate() {
   step++;
   animationFrame = requestAnimationFrame(animate);
-
-  sidebar.draw();
 
   if (readyScreen.finished && game.state === GameState.READY) {
     game.state = GameState.PLAYING;

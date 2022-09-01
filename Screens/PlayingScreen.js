@@ -1,45 +1,46 @@
 class PlayingScreen {
-  constructor(map) {
+  constructor(map, sidebar) {
     this.map = map;
+    this.sidebar = sidebar;
 
     this.countdownToNextWaveText = new Text(
-      { x: 20, y: 20 },
+      { x: this.sidebar.position.x + this.sidebar.width / 2, y: 20 },
       "",
-      map.tileSize / 2,
+      map.tileSize / 3,
+      "top",
+      "center"
+    );
+
+    this.waveText = new Text(
+      { x: this.sidebar.position.x + 20, y: 70 },
+      "",
+      map.tileSize / 3,
       "top",
       "left"
     );
 
-    this.waveText = new Text(
-      { x: canvas.width - 20, y: 20 },
-      "",
-      map.tileSize / 2,
-      "top",
-      "right"
-    );
-
     this.livesText = new Text(
-      { x: canvas.width - 20, y: 60 },
+      { x: this.sidebar.position.x + 20, y: 100 },
       "",
-      map.tileSize / 2,
+      map.tileSize / 3,
       "top",
-      "right"
+      "left"
     );
 
     this.scoreText = new Text(
-      { x: canvas.width - 20, y: 100 },
+      { x: this.sidebar.position.x + 20, y: 130 },
       "",
-      map.tileSize / 2,
+      map.tileSize / 3,
       "top",
-      "right"
+      "left"
     );
 
     this.coinsText = new Text(
-      { x: canvas.width - 20, y: 140 },
+      { x: this.sidebar.position.x + 20, y: 160 },
       "",
-      map.tileSize / 2,
+      map.tileSize / 3,
       "top",
-      "right"
+      "left"
     );
 
     this.hoverTile = new HoverTile(
@@ -60,6 +61,7 @@ class PlayingScreen {
   }
 
   draw() {
+    this.sidebar.draw();
     this.countdownToNextWaveText.draw();
     this.waveText.draw();
     this.livesText.draw();
