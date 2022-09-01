@@ -4,7 +4,10 @@ const ctx = canvas.getContext("2d");
 const level = new BasicLevel();
 const map = new Map(level.tiles);
 
-const sidebar = new Sidebar({ x: map.tiles[0].length * map.tileSize, y: 0 });
+const sidebar = new Sidebar(
+  { x: map.tiles[0].length * map.tileSize, y: 0 },
+  map.tileSize * 4
+);
 
 canvas.width = map.tiles[0].length * map.tileSize + sidebar.width;
 canvas.height = map.tiles.length * map.tileSize;

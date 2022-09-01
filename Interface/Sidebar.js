@@ -1,7 +1,7 @@
 class Sidebar {
-  constructor(position) {
+  constructor(position, width) {
     this.position = position;
-    this.width = 256;
+    this.width = width;
   }
 
   draw() {
