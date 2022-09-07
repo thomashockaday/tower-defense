@@ -1,9 +1,10 @@
 class Enemy {
-  constructor(position, size, path) {
+  constructor(position, size, path, tileSize) {
     this.position = position;
     this.width = size;
     this.height = size;
     this.path = path;
+    this.tileSize = tileSize;
 
     this.currentDirection = null;
     this.nextDirection = null;
@@ -45,8 +46,8 @@ class Enemy {
       return "right";
     }
 
-    const currentTileX = this.position.x / this.width;
-    const currentTileY = this.position.y / this.height;
+    const currentTileX = this.position.x / this.tileSize;
+    const currentTileY = this.position.y / this.tileSize;
     const flooredCurrentTileX = Math.floor(currentTileX);
     const flooredCurrentTileY = Math.floor(currentTileY);
 

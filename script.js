@@ -33,7 +33,8 @@ for (let i = 0; i < 3; i++) {
       new Enemy(
         { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
         map.tileSize,
-        map.tiles
+        map.tiles,
+        map.tileSize
       )
     );
   }
