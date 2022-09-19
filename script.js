@@ -32,7 +32,7 @@ for (let i = 0; i < 3; i++) {
     enemies.push(
       new Enemy(
         { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
-        map.tileSize,
+        map.tileSize - 8,
         map.tiles,
         map.tileSize
       )
