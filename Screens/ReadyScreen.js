@@ -1,7 +1,6 @@
-class ReadyScreen extends AbstractScreen {
+class ReadyScreen {
   constructor(map, nextScreen) {
-    super(map);
-
+    this.map = map;
     this.nextScreen = nextScreen;
 
     this.titleText = new Text(

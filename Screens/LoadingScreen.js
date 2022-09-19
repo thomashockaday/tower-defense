@@ -1,6 +1,7 @@
-class LoadingScreen extends AbstractScreen {
+class LoadingScreen {
   constructor(map) {
-    super(map);
+    this.map = map;
+    this.map = map;
 
     this.titleText = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 - 130 },

@@ -1,7 +1,5 @@
-class SpiralLevel extends AbstractLevel {
+class SpiralLevel {
   constructor() {
-    super();
-
     /**
      * Key:
      * 0: Blank

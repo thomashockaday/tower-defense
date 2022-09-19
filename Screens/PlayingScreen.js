@@ -1,7 +1,6 @@
-class PlayingScreen extends AbstractScreen {
+class PlayingScreen {
   constructor(map, sidebar) {
-    super(map);
-
+    this.map = map;
     this.sidebar = sidebar;
 
     this.countdownToNextWaveText = new Text(

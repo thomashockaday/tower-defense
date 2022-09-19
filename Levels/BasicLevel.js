@@ -1,7 +1,5 @@
-class BasicLevel extends AbstractLevel {
+class BasicLevel {
   constructor() {
-    super();
-
     /**
      * Key:
      * 0: Blank

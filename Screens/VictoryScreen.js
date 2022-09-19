@@ -1,6 +1,6 @@
-class VictoryScreen extends AbstractScreen {
+class VictoryScreen {
   constructor(map) {
-    super(map);
+    this.map = map;
 
     this.victoryText = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 },

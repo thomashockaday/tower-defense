@@ -1,6 +1,6 @@
-class GameOverScreen extends AbstractScreen {
+class GameOverScreen {
   constructor(map) {
-    super(map);
+    this.map = map;
 
     this.gameOverText = new Text(
       { x: canvas.width / 2, y: canvas.height / 2 },
