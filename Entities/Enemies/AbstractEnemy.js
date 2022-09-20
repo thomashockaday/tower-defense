@@ -1,5 +1,9 @@
-class Enemy {
+class AbstractEnemy {
   constructor(position, size, path, tileSize) {
+    if (new.target === AbstractEnemy) {
+      throw new TypeError("Cannot construct Enemy instances directly");
+    }
+
     this.tilePadding = (tileSize - size) / 2;
 
     this.position = {
@@ -14,9 +18,9 @@ class Enemy {
 
     this.currentDirection = null;
     this.nextDirection = null;
-    this.speed = 4;
-    this.health = 3;
-    this.coins = 5;
+    this.speed = null;
+    this.health = null;
+    this.coins = null;
   }
 
   update() {
