@@ -26,6 +26,7 @@ class Tower {
       for (let i = 0; i < enemies.length; i++) {
         if (
           Collision.rectRect(enemies[i], this.range) &&
+          enemies[i].position.x + enemies[i].width > 0 &&
           this.bullets.length < this.maxBullets
         ) {
           this.#shoot(enemies[i]);
