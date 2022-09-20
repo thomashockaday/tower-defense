@@ -1,6 +1,6 @@
 class Game {
-  constructor() {
-    this.state = GameState.LOADING;
+  constructor(screen) {
+    this.screen = screen;
     this.tileSize = 64;
   }
 }

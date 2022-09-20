@@ -63,7 +63,6 @@ for (let i = 0; i < 3; i++) {
 
 let step = 0;
 let animationFrame;
-const game = new Game();
 
 const gameOverScreen = new GameOverScreen(map);
 const loadingScreen = new LoadingScreen(map);
@@ -71,35 +70,27 @@ const playingScreen = new PlayingScreen(map, sidebar);
 const readyScreen = new ReadyScreen(map, playingScreen);
 const victoryScreen = new VictoryScreen(map);
 
+const game = new Game(loadingScreen);
+
 function animate() {
   step++;
   animationFrame = requestAnimationFrame(animate);
 
-  if (readyScreen.finished && game.state === GameState.READY) {
-    game.state = GameState.PLAYING;
+  if (readyScreen.finished && game.screen === readyScreen) {
+    game.screen = playingScreen;
   }
 
-  if (game.state === GameState.READY) {
-    readyScreen.update();
-  }
-
-  if (game.state === GameState.LOADING) {
-    loadingScreen.update();
-  }
-
-  if (game.state === GameState.GAMEOVER) {
-    gameOverScreen.update();
+  if (game.screen === gameOverScreen) {
     cancelAnimationFrame(animationFrame);
     playingScreen.removeEventListeners();
     return;
   }
 
-  if (game.state === GameState.VICTORY) {
-    victoryScreen.update();
+  if (game.screen === victoryScreen) {
     playingScreen.removeEventListeners();
   }
 
-  if (game.state === GameState.PLAYING) {
+  if (game.screen === playingScreen) {
     map.draw();
 
     if (waves[wave].enemies.length === 0) {
@@ -107,7 +98,7 @@ function animate() {
       wave++;
 
       if (wave >= waves.length) {
-        game.state = GameState.VICTORY;
+        game.screen = victoryScreen;
         return;
       }
 
@@ -149,16 +140,16 @@ function animate() {
       countdownToNextWave / 60
     )}`;
 
-    playingScreen.update();
-
     if (lives === 0) {
-      game.state = GameState.GAMEOVER;
+      game.screen = gameOverScreen;
     }
   }
+
+  game.screen.update();
 }
 
 window.addEventListener("load", () => {
-  game.state = GameState.READY;
+  game.screen = readyScreen;
   readyScreen.addEventListeners();
 });
 
