@@ -38,6 +38,26 @@ for (let i = 0; i < 3; i++) {
     );
   }
 
+  for (let j = 1; j <= 17; j += 2) {
+    enemies.push(
+      new FastEnemy(
+        { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
+        map.tiles,
+        map.tileSize
+      )
+    );
+  }
+
+  for (let j = 1; j <= 9; j += 2) {
+    enemies.push(
+      new StrongEnemy(
+        { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
+        map.tiles,
+        map.tileSize
+      )
+    );
+  }
+
   waves.push(new Wave(enemies, map.goal));
 }
 
