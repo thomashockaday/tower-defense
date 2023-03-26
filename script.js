@@ -80,16 +80,6 @@ function animate() {
     game.screen = playingScreen;
   }
 
-  if (game.screen === gameOverScreen) {
-    cancelAnimationFrame(animationFrame);
-    playingScreen.removeEventListeners();
-    return;
-  }
-
-  if (game.screen === victoryScreen) {
-    playingScreen.removeEventListeners();
-  }
-
   if (game.screen === playingScreen) {
     map.draw();
 

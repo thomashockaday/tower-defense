@@ -81,14 +81,6 @@ class PlayingScreen {
     }
   }
 
-  removeEventListeners() {
-    if (this.hasEventListeners) {
-      canvas.removeEventListener("mousemove", this.#mousemoveHandler);
-      canvas.removeEventListener("click", this.#clickHandler);
-      this.hasEventListeners = false;
-    }
-  }
-
   #mousemoveHandler(e) {
     this.hoverTile.position = {
       x: Math.floor(e.clientX / this.map.tileSize) * this.map.tileSize,
