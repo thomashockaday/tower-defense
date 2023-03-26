@@ -4,7 +4,7 @@ class Bullet {
     this.velocity = velocity;
 
     this.radius = 8;
-    this.speed = 10;
+    this.speed = 16;
     this.finished = false;
   }
 
