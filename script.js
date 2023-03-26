@@ -4,12 +4,13 @@ const ctx = canvas.getContext("2d");
 const level = new BasicLevel();
 const map = new Map(level.tiles);
 
-const sidebar = new Sidebar(
-  { x: map.tiles[0].length * map.tileSize, y: 0 },
-  map.tileSize * 4
+const topbar = new Topbar(
+  { x: 0, y: 0 },
+  map.tileSize * map.tiles[0].length,
+  map.tileSize
 );
 
-canvas.width = map.tiles[0].length * map.tileSize + sidebar.width;
+canvas.width = map.tiles[0].length * map.tileSize;
 canvas.height = map.tiles.length * map.tileSize;
 
 const firstPathTile = map.tiles.map((tile) => tile[0]);
@@ -66,7 +67,7 @@ let animationFrame;
 
 const gameOverScreen = new GameOverScreen(map);
 const loadingScreen = new LoadingScreen(map);
-const playingScreen = new PlayingScreen(map, sidebar);
+const playingScreen = new PlayingScreen(map, topbar);
 const readyScreen = new ReadyScreen(map, playingScreen);
 const victoryScreen = new VictoryScreen(map);
 
