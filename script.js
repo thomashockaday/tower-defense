@@ -127,7 +127,7 @@ function animate() {
     playingScreen.scoreText.text = `Score: ${score}`;
     playingScreen.coinsText.text = `Coins: ${coins}`;
 
-    playingScreen.countdownToNextWaveText.text = `Next wave in: ${Math.floor(
+    playingScreen.countdownToNextWaveText.text = `Next: ${Math.floor(
       countdownToNextWave / 60
     )}`;
 
