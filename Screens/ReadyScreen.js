@@ -69,6 +69,8 @@ class ReadyScreen {
   }
 
   update() {
+    this.playButton.update();
+
     if (this.playButton.clicked) {
       this.finished = true;
       this.nextScreen.addEventListeners();

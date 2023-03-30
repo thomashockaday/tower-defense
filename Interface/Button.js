@@ -10,6 +10,10 @@ class Button {
     this.clicked = false;
   }
 
+  update() {
+    this.hover = Collision.rectRect(cursor, this);
+  }
+
   draw() {
     ctx.fillStyle = this.hover ? "white" : "black";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -26,30 +30,13 @@ class Button {
   }
 
   addEventListeners() {
-    canvas.addEventListener("mousemove", (e) => {
-      this.#mousemoveHandler(e);
-    });
     canvas.addEventListener("click", () => {
       this.#clickHandler();
     });
   }
 
   removeEventListeners() {
-    canvas.removeEventListener("mousemove", this.#mousemoveHandler);
     canvas.removeEventListener("click", this.#clickHandler);
-  }
-
-  #mousemoveHandler(e) {
-    const cursor = {
-      position: {
-        x: e.clientX,
-        y: e.clientY,
-      },
-      width: 1,
-      height: 1,
-    };
-
-    this.hover = Collision.rectRect(cursor, this);
   }
 
   #clickHandler() {

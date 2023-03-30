@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 
 const level = new BasicLevel();
 const map = new Map(level.tiles);
+const cursor = new Cursor();
 
 const topbar = new Topbar(
   { x: 0, y: 0 },
@@ -142,6 +143,13 @@ function animate() {
 window.addEventListener("load", () => {
   game.screen = readyScreen;
   readyScreen.addEventListeners();
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  cursor.position = {
+    x: e.layerX,
+    y: e.layerY,
+  };
 });
 
 animate();
