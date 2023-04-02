@@ -1,67 +1,64 @@
 class ReadyScreen {
-  constructor(map, nextScreen) {
-    this.map = map;
-    this.nextScreen = nextScreen;
-
+  constructor(map) {
     this.titleText1 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 2.5 },
+      { x: canvas.width / 2, y: map.tileSize * 2.5 },
       "Tower",
-      this.map.tileSize
+      map.tileSize
     );
     this.titleText2 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 3.5 },
+      { x: canvas.width / 2, y: map.tileSize * 3.5 },
       "Defense",
-      this.map.tileSize
+      map.tileSize
     );
 
     this.instructions1 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 5 },
+      { x: canvas.width / 2, y: map.tileSize * 5 },
       "Enemies will follow the path to the goal",
-      this.map.tileSize / 2.5
+      map.tileSize / 2.5
     );
     this.instructions2 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 5.5 },
+      { x: canvas.width / 2, y: map.tileSize * 5.5 },
       "Towers will try to kill them",
-      this.map.tileSize / 2.5
+      map.tileSize / 2.5
     );
 
     this.instructions3 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 6.5 },
+      { x: canvas.width / 2, y: map.tileSize * 6.5 },
       "Place towers by tapping on an empty tile",
-      this.map.tileSize / 2.5
+      map.tileSize / 2.5
     );
     this.instructions4 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 7 },
+      { x: canvas.width / 2, y: map.tileSize * 7 },
       "Towers cost coins",
-      this.map.tileSize / 2.5
+      map.tileSize / 2.5
     );
     this.instructions5 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 7.5 },
+      { x: canvas.width / 2, y: map.tileSize * 7.5 },
       "Coins are rewarded when an enemy is killed",
-      this.map.tileSize / 2.5
+      map.tileSize / 2.5
     );
 
     this.instructions6 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 8.5 },
+      { x: canvas.width / 2, y: map.tileSize * 8.5 },
       "If an enemy makes it to the goal you will lose a life",
-      this.map.tileSize / 2.5
+      map.tileSize / 2.5
     );
     this.instructions7 = new Text(
-      { x: canvas.width / 2, y: this.map.tileSize * 9 },
+      { x: canvas.width / 2, y: map.tileSize * 9 },
       "Don't lose all your lives!",
-      this.map.tileSize / 2.5
+      map.tileSize / 2.5
     );
 
-    const buttonWidth = this.map.tileSize * 4;
+    const buttonWidth = map.tileSize * 4;
     this.playButton = new Button(
       {
         x: canvas.width / 2 - buttonWidth / 2,
-        y: this.map.tileSize * 10,
+        y: map.tileSize * 10,
       },
       buttonWidth,
-      this.map.tileSize * 1.5,
+      map.tileSize * 1.5,
       "Play",
-      this.map.tileSize / 2
+      map.tileSize / 2
     );
 
     this.finished = false;
