@@ -80,6 +80,7 @@ function animate() {
 
   if (readyScreen.finished && game.screen === readyScreen) {
     game.screen = playingScreen;
+    playingScreen.active = true;
   }
 
   if (game.screen === playingScreen) {
@@ -142,7 +143,6 @@ function animate() {
 
 window.addEventListener("load", () => {
   game.screen = readyScreen;
-  readyScreen.addEventListeners();
 });
 
 canvas.addEventListener("mousemove", (e) => {
@@ -150,6 +150,14 @@ canvas.addEventListener("mousemove", (e) => {
     x: e.layerX,
     y: e.layerY,
   };
+});
+
+canvas.addEventListener("mousedown", () => {
+  cursor.clicking = true;
+});
+
+canvas.addEventListener("mouseup", () => {
+  cursor.clicking = false;
 });
 
 animate();

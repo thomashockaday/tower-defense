@@ -64,7 +64,6 @@ class ReadyScreen {
       this.map.tileSize / 2
     );
 
-    this.hasEventListeners = false;
     this.finished = false;
   }
 
@@ -73,7 +72,6 @@ class ReadyScreen {
 
     if (this.playButton.clicked) {
       this.finished = true;
-      this.nextScreen.addEventListeners();
     }
 
     this.draw();
@@ -93,12 +91,5 @@ class ReadyScreen {
     this.instructions6.draw();
     this.instructions7.draw();
     this.playButton.draw();
-  }
-
-  addEventListeners() {
-    if (!this.hasEventListeners) {
-      this.playButton.addEventListeners();
-      this.hasEventListeners = true;
-    }
   }
 }

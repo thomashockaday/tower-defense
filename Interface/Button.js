@@ -12,6 +12,10 @@ class Button {
 
   update() {
     this.hover = Collision.rectRect(cursor, this);
+
+    if (this.hover && cursor.clicking) {
+      this.clicked = true;
+    }
   }
 
   draw() {
@@ -27,22 +31,5 @@ class Button {
       this.position.x + this.width / 2,
       this.position.y + this.height / 2
     );
-  }
-
-  addEventListeners() {
-    canvas.addEventListener("click", () => {
-      this.#clickHandler();
-    });
-  }
-
-  removeEventListeners() {
-    canvas.removeEventListener("click", this.#clickHandler);
-  }
-
-  #clickHandler() {
-    if (this.hover) {
-      this.clicked = true;
-      this.removeEventListeners();
-    }
   }
 }

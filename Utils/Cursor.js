@@ -6,5 +6,6 @@ class Cursor {
     };
     this.width = 1;
     this.height = 1;
+    this.clicking = false;
   }
 }

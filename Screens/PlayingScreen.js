@@ -51,13 +51,22 @@ class PlayingScreen {
       this.map.tileSize
     );
 
-    this.hasEventListeners = false;
+    this.active = false;
     this.finished = false;
   }
 
   update() {
     this.hoverTile.update();
     this.draw();
+
+    this.hoverTile.position = {
+      x: Math.floor(cursor.position.x / this.map.tileSize) * this.map.tileSize,
+      y: Math.floor(cursor.position.y / this.map.tileSize) * this.map.tileSize,
+    };
+
+    if (this.active && cursor.clicking) {
+      this.#clickHandler();
+    }
   }
 
   draw() {
@@ -67,25 +76,6 @@ class PlayingScreen {
     this.livesText.draw();
     this.scoreText.draw();
     this.coinsText.draw();
-  }
-
-  addEventListeners() {
-    if (!this.hasEventListeners) {
-      canvas.addEventListener("mousemove", (e) => {
-        this.#mousemoveHandler(e);
-      });
-      canvas.addEventListener("click", () => {
-        this.#clickHandler();
-      });
-      this.hasEventListeners = true;
-    }
-  }
-
-  #mousemoveHandler(e) {
-    this.hoverTile.position = {
-      x: Math.floor(e.clientX / this.map.tileSize) * this.map.tileSize,
-      y: Math.floor(e.clientY / this.map.tileSize) * this.map.tileSize,
-    };
   }
 
   #clickHandler() {
