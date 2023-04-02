@@ -1,15 +1,10 @@
 class LoadingScreen {
   constructor(map) {
-    this.map = map;
-    this.map = map;
-
     this.titleText = new Text(
-      { x: canvas.width / 2, y: canvas.height / 2 - 130 },
+      { x: canvas.width / 2, y: canvas.height / 2 },
       "Loading",
-      this.map.tileSize
+      map.tileSize
     );
-
-    this.finished = false;
   }
 
   update() {

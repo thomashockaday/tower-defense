@@ -1,10 +1,10 @@
 class Button {
   constructor(position, width, height, text, textSize) {
     this.position = position;
-    this.text = text;
-    this.textSize = textSize;
     this.width = width;
     this.height = height;
+    this.text = text;
+    this.textSize = textSize;
 
     this.hover = false;
     this.clicked = false;
