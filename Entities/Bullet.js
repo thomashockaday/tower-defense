@@ -20,8 +20,6 @@ class Bullet {
     ) {
       this.finished = true;
     }
-
-    this.draw();
   }
 
   draw() {

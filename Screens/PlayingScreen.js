@@ -22,7 +22,6 @@ class PlayingScreen {
 
   update() {
     this.hoverTile.update();
-    this.draw();
 
     this.hoverTile.position = {
       x: Math.floor(cursor.position.x / this.map.tileSize) * this.map.tileSize,
@@ -36,6 +35,7 @@ class PlayingScreen {
 
   draw() {
     this.topbar.draw();
+    this.hoverTile.draw();
   }
 
   #clickHandler() {

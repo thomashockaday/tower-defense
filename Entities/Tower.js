@@ -20,8 +20,6 @@ class Tower {
   }
 
   update(step, enemies) {
-    this.draw();
-
     if (step % this.cooldown === 0) {
       for (let i = 0; i < enemies.length; i++) {
         if (
@@ -55,6 +53,10 @@ class Tower {
       this.range.width,
       this.range.height
     );
+
+    this.bullets.forEach((bullet) => {
+      bullet.draw();
+    });
   }
 
   #shoot(enemy) {

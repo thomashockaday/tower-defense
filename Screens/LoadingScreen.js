@@ -8,7 +8,7 @@ class LoadingScreen {
   }
 
   update() {
-    this.draw();
+    //
   }
 
   draw() {

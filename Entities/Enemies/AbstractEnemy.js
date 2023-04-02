@@ -42,8 +42,6 @@ class AbstractEnemy {
     if (this.nextDirection === "left") {
       this.position.x -= this.speed;
     }
-
-    this.draw();
   }
 
   draw() {

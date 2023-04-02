@@ -14,8 +14,6 @@ class HoverTile {
       x: Math.floor(this.position.x / this.size),
       y: Math.floor(this.position.y / this.size),
     };
-
-    this.draw();
   }
 
   draw() {

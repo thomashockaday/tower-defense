@@ -22,4 +22,10 @@ class Wave {
       }
     }
   }
+
+  draw() {
+    this.enemies.forEach((enemy) => {
+      enemy.draw();
+    });
+  }
 }

@@ -10,7 +10,7 @@ class VictoryScreen {
   }
 
   update() {
-    this.draw();
+    //
   }
 
   draw() {

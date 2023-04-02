@@ -70,8 +70,6 @@ class ReadyScreen {
     if (this.playButton.clicked) {
       this.finished = true;
     }
-
-    this.draw();
   }
 
   draw() {

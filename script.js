@@ -78,8 +78,6 @@ function animate() {
   }
 
   if (game.screen === playingScreen) {
-    map.draw();
-
     if (waves[wave].enemies.length === 0) {
       waves[wave].finished = true;
       wave++;
@@ -133,6 +131,18 @@ function animate() {
   }
 
   game.screen.update();
+
+  map.draw();
+
+  map.towers.forEach((tower) => {
+    tower.draw();
+  });
+
+  waves.forEach((wave) => {
+    wave.draw();
+  });
+
+  game.screen.draw();
 }
 
 window.addEventListener("load", () => {
