@@ -5,12 +5,6 @@ const level = new BasicLevel();
 const map = new Map(level.tiles);
 const cursor = new Cursor();
 
-const topbar = new Topbar(
-  { x: 0, y: 0 },
-  map.tileSize * map.tiles[0].length,
-  map.tileSize
-);
-
 canvas.width = map.tiles[0].length * map.tileSize;
 canvas.height = map.tiles.length * map.tileSize;
 
@@ -68,7 +62,7 @@ let animationFrame;
 
 const gameOverScreen = new GameOverScreen(map);
 const loadingScreen = new LoadingScreen(map);
-const playingScreen = new PlayingScreen(map, topbar);
+const playingScreen = new PlayingScreen(map);
 const readyScreen = new ReadyScreen(map, playingScreen);
 const victoryScreen = new VictoryScreen(map);
 
@@ -124,12 +118,12 @@ function animate() {
       }
     }
 
-    playingScreen.waveText.text = `Wave: ${wave + 1}`;
-    playingScreen.livesText.text = `Lives: ${lives}`;
-    playingScreen.scoreText.text = `Score: ${score}`;
-    playingScreen.coinsText.text = `Coins: ${coins}`;
+    playingScreen.topbar.waveText.text = `Wave: ${wave + 1}`;
+    playingScreen.topbar.livesText.text = `Lives: ${lives}`;
+    playingScreen.topbar.scoreText.text = `Score: ${score}`;
+    playingScreen.topbar.coinsText.text = `Coins: ${coins}`;
 
-    playingScreen.countdownToNextWaveText.text = `Next: ${Math.floor(
+    playingScreen.topbar.countdownToNextWaveText.text = `Next: ${Math.floor(
       countdownToNextWave / 60
     )}`;
 

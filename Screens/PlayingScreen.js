@@ -1,46 +1,11 @@
 class PlayingScreen {
-  constructor(map, topbar) {
+  constructor(map) {
     this.map = map;
-    this.topbar = topbar;
 
-    this.countdownToNextWaveText = new Text(
-      { x: this.topbar.position.x, y: 20 },
-      "",
-      this.map.tileSize / 3,
-      "top",
-      "left"
-    );
-
-    this.waveText = new Text(
-      { x: this.topbar.position.x + this.topbar.width / 5, y: 20 },
-      "",
-      this.map.tileSize / 3,
-      "top",
-      "left"
-    );
-
-    this.livesText = new Text(
-      { x: this.topbar.position.x + (2 * this.topbar.width) / 5, y: 20 },
-      "",
-      this.map.tileSize / 3,
-      "top",
-      "left"
-    );
-
-    this.scoreText = new Text(
-      { x: this.topbar.position.x + (3 * this.topbar.width) / 5, y: 20 },
-      "",
-      this.map.tileSize / 3,
-      "top",
-      "left"
-    );
-
-    this.coinsText = new Text(
-      { x: this.topbar.position.x + (4 * this.topbar.width) / 5, y: 20 },
-      "",
-      this.map.tileSize / 3,
-      "top",
-      "left"
+    this.topbar = new Topbar(
+      { x: 0, y: 0 },
+      map.tileSize * map.tiles[0].length,
+      map.tileSize
     );
 
     this.hoverTile = new HoverTile(
@@ -71,11 +36,6 @@ class PlayingScreen {
 
   draw() {
     this.topbar.draw();
-    this.countdownToNextWaveText.draw();
-    this.waveText.draw();
-    this.livesText.draw();
-    this.scoreText.draw();
-    this.coinsText.draw();
   }
 
   #clickHandler() {
