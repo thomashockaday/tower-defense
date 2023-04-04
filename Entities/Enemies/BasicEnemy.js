@@ -3,7 +3,8 @@ class BasicEnemy extends AbstractEnemy {
     super(position, tileSize - 8, path, tileSize);
 
     this.speed = 2;
-    this.health = 3;
+    this.fullHealth = 3;
+    this.health = this.fullHealth;
     this.coins = 5;
   }
 }

@@ -19,6 +19,7 @@ class AbstractEnemy {
     this.currentDirection = null;
     this.nextDirection = null;
     this.speed = null;
+    this.fullHealth = null;
     this.health = null;
     this.coins = null;
   }
@@ -47,6 +48,12 @@ class AbstractEnemy {
   draw() {
     ctx.fillStyle = "#c20102";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+    const healthPercentage = (this.health / this.fullHealth) * this.width;
+    ctx.fillStyle = "#1e272e";
+    ctx.fillRect(this.position.x, this.position.y - 10, this.width, 5);
+    ctx.fillStyle = "#4cd137";
+    ctx.fillRect(this.position.x, this.position.y - 10, healthPercentage, 5);
   }
 
   #calculateNextDirection() {

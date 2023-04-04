@@ -3,7 +3,8 @@ class FastEnemy extends AbstractEnemy {
     super(position, tileSize - 16, path, tileSize);
 
     this.speed = 4;
-    this.health = 2;
+    this.fullHealth = 2;
+    this.health = this.fullHealth;
     this.coins = 5;
   }
 }
