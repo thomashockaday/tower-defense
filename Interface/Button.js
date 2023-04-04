@@ -15,6 +15,7 @@ class Button {
 
     if (this.hover && cursor.clicking) {
       this.clicked = true;
+      cursor.clicking = false;
     }
   }
 

@@ -30,6 +30,7 @@ class PlayingScreen {
 
     if (this.active && cursor.clicking) {
       this.#clickHandler();
+      cursor.clicking = false;
     }
   }
 
