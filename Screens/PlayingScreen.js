@@ -56,7 +56,7 @@ class PlayingScreen {
     ) {
       this.map.tiles[this.hoverTile.currentTile.y][
         this.hoverTile.currentTile.x
-      ] = 2;
+      ] = 9;
       this.map.towers.push(tower);
       coins -= tower.cost;
     }

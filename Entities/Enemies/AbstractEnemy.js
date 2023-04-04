@@ -67,28 +67,28 @@ class AbstractEnemy {
     }
 
     if (
-      this.path[flooredCurrentTileY - 1][flooredCurrentTileX] === 1 &&
+      this.path[flooredCurrentTileY - 1][flooredCurrentTileX] === 2 &&
       this.currentDirection !== "down"
     ) {
       return "up";
     }
 
     if (
-      this.path[flooredCurrentTileY][flooredCurrentTileX + 1] === 1 &&
+      this.path[flooredCurrentTileY][flooredCurrentTileX + 1] === 2 &&
       this.currentDirection !== "left"
     ) {
       return "right";
     }
 
     if (
-      this.path[flooredCurrentTileY + 1][flooredCurrentTileX] === 1 &&
+      this.path[flooredCurrentTileY + 1][flooredCurrentTileX] === 2 &&
       this.currentDirection !== "up"
     ) {
       return "down";
     }
 
     if (
-      this.path[flooredCurrentTileY][flooredCurrentTileX - 1] === 1 &&
+      this.path[flooredCurrentTileY][flooredCurrentTileX - 1] === 2 &&
       this.currentDirection !== "right"
     ) {
       return "left";

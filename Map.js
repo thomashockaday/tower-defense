@@ -13,6 +13,7 @@ class Map {
 
         switch (this.tiles[i][j]) {
           case 1:
+          case 2:
             fillStyle = "#d1c99a";
             break;
           case 3:
@@ -40,7 +41,7 @@ class Map {
 
     for (let i = 0; i < this.tiles.length; i++) {
       for (let j = 0; j < this.tiles[i].length; j++) {
-        if (this.tiles[i][j] === 2) {
+        if (this.tiles[i][j] === 9) {
           towers.push(
             new Tower(
               { x: j * this.tileSize, y: i * this.tileSize },
