@@ -3,21 +3,12 @@
   padding: 0;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 canvas {
   display: block;
 }
-
-.screen-warning {
-  display: none;
-  padding: 20px;
-}
-
-/* @media (max-width: 900px) or (max-height: 900px) {
-  .screen-warning {
-    display: block;
-  }
-
-  canvas {
-    display: none;
-  }
-} */

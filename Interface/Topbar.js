@@ -7,42 +7,42 @@ class Topbar {
     const textSize = this.height / 3;
 
     this.countdownToNextWaveText = new Text(
-      { x: this.position.x, y: 20 },
+      { x: this.position.x + 10, y: this.height / 2 },
       "",
       textSize,
-      "top",
+      "middle",
       "left"
     );
 
     this.waveText = new Text(
-      { x: this.position.x + this.width / 5, y: 20 },
+      { x: this.position.x + this.width / 5 + 10, y: this.height / 2 },
       "",
       textSize,
-      "top",
+      "middle",
       "left"
     );
 
     this.livesText = new Text(
-      { x: this.position.x + (2 * this.width) / 5, y: 20 },
+      { x: this.position.x + (2 * this.width) / 5 + 10, y: this.height / 2 },
       "",
       textSize,
-      "top",
+      "middle",
       "left"
     );
 
     this.scoreText = new Text(
-      { x: this.position.x + (3 * this.width) / 5, y: 20 },
+      { x: this.position.x + (3 * this.width) / 5 + 10, y: this.height / 2 },
       "",
       textSize,
-      "top",
+      "middle",
       "left"
     );
 
     this.coinsText = new Text(
-      { x: this.position.x + (4 * this.width) / 5, y: 20 },
+      { x: this.position.x + (4 * this.width) / 5 + 10, y: this.height / 2 },
       "",
       textSize,
-      "top",
+      "middle",
       "left"
     );
   }
