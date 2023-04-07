@@ -17,7 +17,7 @@ class Map {
             fillStyle = "#d1c99a";
             break;
           case 3:
-            fillStyle = "#d35400";
+            fillStyle = "#c5bb81";
             break;
         }
 
@@ -28,6 +28,96 @@ class Map {
           this.tileSize,
           this.tileSize
         );
+
+        const pathTiles = [1, 2, 3];
+
+        if (pathTiles.includes(this.tiles[i][j])) {
+          ctx.fillStyle = "#c5bb81";
+
+          if (!pathTiles.includes(this.tiles[i - 1][j])) {
+            ctx.fillRect(
+              j * this.tileSize,
+              i * this.tileSize,
+              this.tileSize,
+              this.tileSize / 10
+            );
+          }
+
+          if (!pathTiles.includes(this.tiles[i][j + 1])) {
+            ctx.fillRect(
+              j * this.tileSize + (this.tileSize / 10) * 9,
+              i * this.tileSize,
+              this.tileSize / 10,
+              this.tileSize
+            );
+          }
+
+          if (!pathTiles.includes(this.tiles[i + 1][j])) {
+            ctx.fillRect(
+              j * this.tileSize,
+              i * this.tileSize + (this.tileSize / 10) * 9,
+              this.tileSize,
+              this.tileSize / 10
+            );
+          }
+
+          if (!pathTiles.includes(this.tiles[i][j - 1])) {
+            ctx.fillRect(
+              j * this.tileSize,
+              i * this.tileSize,
+              this.tileSize / 10,
+              this.tileSize
+            );
+          }
+
+          if (
+            pathTiles.includes(this.tiles[i - 1][j]) &&
+            pathTiles.includes(this.tiles[i][j - 1])
+          ) {
+            ctx.fillRect(
+              j * this.tileSize,
+              i * this.tileSize,
+              this.tileSize / 10,
+              this.tileSize / 10
+            );
+          }
+
+          if (
+            pathTiles.includes(this.tiles[i - 1][j]) &&
+            pathTiles.includes(this.tiles[i][j + 1])
+          ) {
+            ctx.fillRect(
+              j * this.tileSize + (this.tileSize / 10) * 9,
+              i * this.tileSize,
+              this.tileSize / 10,
+              this.tileSize / 10
+            );
+          }
+
+          if (
+            pathTiles.includes(this.tiles[i + 1][j]) &&
+            pathTiles.includes(this.tiles[i][j + 1])
+          ) {
+            ctx.fillRect(
+              j * this.tileSize + (this.tileSize / 10) * 9,
+              i * this.tileSize + (this.tileSize / 10) * 9,
+              this.tileSize / 10,
+              this.tileSize / 10
+            );
+          }
+
+          if (
+            pathTiles.includes(this.tiles[i + 1][j]) &&
+            pathTiles.includes(this.tiles[i][j - 1])
+          ) {
+            ctx.fillRect(
+              j * this.tileSize,
+              i * this.tileSize + (this.tileSize / 10) * 9,
+              this.tileSize / 10,
+              this.tileSize / 10
+            );
+          }
+        }
       }
     }
   }
