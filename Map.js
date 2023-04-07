@@ -1,7 +1,7 @@
 class Map {
   constructor(tiles) {
     this.tiles = tiles;
-    this.tileSize = 64;
+    this.tileSize = 48;
     this.towers = this.#getStartingTowers();
     this.goal = this.#getGoal();
   }
