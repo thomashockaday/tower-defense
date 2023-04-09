@@ -1,6 +1,6 @@
 class BasicEnemy extends AbstractEnemy {
-  constructor(position, path, tileSize) {
-    super(position, tileSize - 8, path, tileSize);
+  constructor(position, tileSize, waypoints) {
+    super(position, tileSize - 8, tileSize, waypoints);
 
     this.speed = 2;
     this.fullHealth = 3;

@@ -28,8 +28,8 @@ for (let i = 0; i < 3; i++) {
     enemies.push(
       new BasicEnemy(
         { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
-        map.tiles,
-        map.tileSize
+        map.tileSize,
+        level.waypoints
       )
     );
   }
@@ -38,8 +38,8 @@ for (let i = 0; i < 3; i++) {
     enemies.push(
       new FastEnemy(
         { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
-        map.tiles,
-        map.tileSize
+        map.tileSize,
+        level.waypoints
       )
     );
   }
@@ -48,8 +48,8 @@ for (let i = 0; i < 3; i++) {
     enemies.push(
       new StrongEnemy(
         { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
-        map.tiles,
-        map.tileSize
+        map.tileSize,
+        level.waypoints
       )
     );
   }

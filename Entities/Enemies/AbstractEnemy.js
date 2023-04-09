@@ -1,5 +1,5 @@
 class AbstractEnemy {
-  constructor(position, size, path, tileSize) {
+  constructor(position, size, tileSize, waypoints) {
     if (new.target === AbstractEnemy) {
       throw new TypeError("Cannot construct Enemy instances directly");
     }
@@ -13,7 +13,10 @@ class AbstractEnemy {
 
     this.width = size;
     this.height = size;
-    this.path = path;
+    this.center = {
+      x: this.position.x + this.width / 2,
+      y: this.position.y + this.height / 2,
+    };
     this.tileSize = tileSize;
 
     this.currentDirection = null;
@@ -22,26 +25,30 @@ class AbstractEnemy {
     this.fullHealth = null;
     this.health = null;
     this.coins = null;
+
+    this.waypoints = waypoints;
+    this.waypointIndex = 0;
   }
 
   update() {
-    this.currentDirection = this.nextDirection;
-    this.nextDirection = this.#calculateNextDirection();
+    this.center = {
+      x: this.position.x + this.width / 2,
+      y: this.position.y + this.height / 2,
+    };
 
-    if (this.nextDirection === "up") {
-      this.position.y -= this.speed;
-    }
+    const waypoint = this.waypoints[this.waypointIndex];
+    const yDistance = waypoint.y - this.center.y;
+    const xDistance = waypoint.x - this.center.x;
+    const angle = Math.atan2(yDistance, xDistance);
+    this.position.x += Math.cos(angle) * this.speed;
+    this.position.y += Math.sin(angle) * this.speed;
 
-    if (this.nextDirection === "right") {
-      this.position.x += this.speed;
-    }
-
-    if (this.nextDirection === "down") {
-      this.position.y += this.speed;
-    }
-
-    if (this.nextDirection === "left") {
-      this.position.x -= this.speed;
+    if (
+      Math.round(this.center.x) === waypoint.x &&
+      Math.round(this.center.y) === waypoint.y &&
+      this.waypointIndex < this.waypoints.length - 1
+    ) {
+      this.waypointIndex++;
     }
   }
 
@@ -54,53 +61,5 @@ class AbstractEnemy {
     ctx.fillRect(this.position.x, this.position.y - 10, this.width, 5);
     ctx.fillStyle = "#4cd137";
     ctx.fillRect(this.position.x, this.position.y - 10, healthPercentage, 5);
-  }
-
-  #calculateNextDirection() {
-    if (this.position.x < 0) {
-      return "right";
-    }
-
-    const currentTileX = (this.position.x - this.tilePadding) / this.tileSize;
-    const currentTileY = (this.position.y - this.tilePadding) / this.tileSize;
-    const flooredCurrentTileX = Math.floor(currentTileX);
-    const flooredCurrentTileY = Math.floor(currentTileY);
-
-    if (
-      currentTileX !== flooredCurrentTileX ||
-      currentTileY !== flooredCurrentTileY
-    ) {
-      return this.currentDirection;
-    }
-
-    if (
-      this.path[flooredCurrentTileY - 1][flooredCurrentTileX] === 2 &&
-      this.currentDirection !== "down"
-    ) {
-      return "up";
-    }
-
-    if (
-      this.path[flooredCurrentTileY][flooredCurrentTileX + 1] === 2 &&
-      this.currentDirection !== "left"
-    ) {
-      return "right";
-    }
-
-    if (
-      this.path[flooredCurrentTileY + 1][flooredCurrentTileX] === 2 &&
-      this.currentDirection !== "up"
-    ) {
-      return "down";
-    }
-
-    if (
-      this.path[flooredCurrentTileY][flooredCurrentTileX - 1] === 2 &&
-      this.currentDirection !== "right"
-    ) {
-      return "left";
-    }
-
-    return this.currentDirection;
   }
 }
