@@ -34,7 +34,10 @@ class Map {
         if (pathTiles.includes(this.tiles[i][j])) {
           ctx.fillStyle = "#c5bb81";
 
-          if (!pathTiles.includes(this.tiles[i - 1][j])) {
+          if (
+            this.tiles[i - 1] !== undefined &&
+            !pathTiles.includes(this.tiles[i - 1][j])
+          ) {
             ctx.fillRect(
               j * this.tileSize,
               i * this.tileSize,
@@ -43,7 +46,10 @@ class Map {
             );
           }
 
-          if (!pathTiles.includes(this.tiles[i][j + 1])) {
+          if (
+            this.tiles[i][j + 1] !== undefined &&
+            !pathTiles.includes(this.tiles[i][j + 1])
+          ) {
             ctx.fillRect(
               j * this.tileSize + (this.tileSize / 10) * 9,
               i * this.tileSize,
@@ -52,7 +58,10 @@ class Map {
             );
           }
 
-          if (!pathTiles.includes(this.tiles[i + 1][j])) {
+          if (
+            this.tiles[i + 1] !== undefined &&
+            !pathTiles.includes(this.tiles[i + 1][j])
+          ) {
             ctx.fillRect(
               j * this.tileSize,
               i * this.tileSize + (this.tileSize / 10) * 9,
@@ -61,7 +70,10 @@ class Map {
             );
           }
 
-          if (!pathTiles.includes(this.tiles[i][j - 1])) {
+          if (
+            this.tiles[i][j - 1] !== undefined &&
+            !pathTiles.includes(this.tiles[i][j - 1])
+          ) {
             ctx.fillRect(
               j * this.tileSize,
               i * this.tileSize,
@@ -71,6 +83,8 @@ class Map {
           }
 
           if (
+            this.tiles[i - 1] !== undefined &&
+            this.tiles[i][j - 1] !== undefined &&
             pathTiles.includes(this.tiles[i - 1][j]) &&
             pathTiles.includes(this.tiles[i][j - 1])
           ) {
@@ -83,6 +97,8 @@ class Map {
           }
 
           if (
+            this.tiles[i - 1] !== undefined &&
+            this.tiles[i][j + 1] !== undefined &&
             pathTiles.includes(this.tiles[i - 1][j]) &&
             pathTiles.includes(this.tiles[i][j + 1])
           ) {
@@ -95,6 +111,8 @@ class Map {
           }
 
           if (
+            this.tiles[i + 1] !== undefined &&
+            this.tiles[i][j + 1] !== undefined &&
             pathTiles.includes(this.tiles[i + 1][j]) &&
             pathTiles.includes(this.tiles[i][j + 1])
           ) {
@@ -107,6 +125,8 @@ class Map {
           }
 
           if (
+            this.tiles[i + 1] !== undefined &&
+            this.tiles[i][j - 1] !== undefined &&
             pathTiles.includes(this.tiles[i + 1][j]) &&
             pathTiles.includes(this.tiles[i][j - 1])
           ) {
