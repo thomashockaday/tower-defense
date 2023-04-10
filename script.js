@@ -8,9 +8,6 @@ const cursor = new Cursor();
 canvas.width = map.tiles[0].length * map.tileSize;
 canvas.height = map.tiles.length * map.tileSize;
 
-const firstPathTile = map.tiles.map((tile) => tile[0]);
-const firstPathTilePosition = firstPathTile.indexOf(1);
-
 let lives = 3;
 let score = 0;
 let coins = 10;
@@ -27,7 +24,7 @@ for (let i = 0; i < 3; i++) {
   for (let j = 1; j <= 33; j += 2) {
     enemies.push(
       new BasicEnemy(
-        { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
+        { x: -map.tileSize * j, y: level.waypoints[0].y - map.tileSize / 2 },
         map.tileSize,
         level.waypoints
       )
@@ -37,7 +34,7 @@ for (let i = 0; i < 3; i++) {
   for (let j = 1; j <= 17; j += 2) {
     enemies.push(
       new FastEnemy(
-        { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
+        { x: -map.tileSize * j, y: level.waypoints[0].y - map.tileSize / 2 },
         map.tileSize,
         level.waypoints
       )
@@ -47,7 +44,7 @@ for (let i = 0; i < 3; i++) {
   for (let j = 1; j <= 9; j += 2) {
     enemies.push(
       new StrongEnemy(
-        { x: -map.tileSize * j, y: firstPathTilePosition * map.tileSize },
+        { x: -map.tileSize * j, y: level.waypoints[0].y - map.tileSize / 2 },
         map.tileSize,
         level.waypoints
       )
