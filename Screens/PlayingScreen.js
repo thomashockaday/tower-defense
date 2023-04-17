@@ -8,24 +8,33 @@ class PlayingScreen {
       map.tileSize
     );
 
-    this.hoverTile = new HoverTile(
-      {
-        x: -1,
-        y: -1,
+    this.hoverTile = {
+      position: {
+        x: Math.floor(cursor.position.x / map.tileSize) * map.tileSize,
+        y: Math.floor(cursor.position.y / map.tileSize) * map.tileSize,
       },
-      this.map.tileSize
-    );
+      tile: {
+        x: Math.floor(cursor.position.x / map.tileSize),
+        y: Math.floor(cursor.position.y / map.tileSize),
+      },
+    };
 
     this.active = false;
     this.finished = false;
   }
 
   update() {
-    this.hoverTile.update();
-
-    this.hoverTile.position = {
-      x: Math.floor(cursor.position.x / this.map.tileSize) * this.map.tileSize,
-      y: Math.floor(cursor.position.y / this.map.tileSize) * this.map.tileSize,
+    this.hoverTile = {
+      position: {
+        x:
+          Math.floor(cursor.position.x / this.map.tileSize) * this.map.tileSize,
+        y:
+          Math.floor(cursor.position.y / this.map.tileSize) * this.map.tileSize,
+      },
+      currentTile: {
+        x: Math.floor(cursor.position.x / this.map.tileSize),
+        y: Math.floor(cursor.position.y / this.map.tileSize),
+      },
     };
 
     if (this.active && cursor.clicking) {
@@ -36,7 +45,14 @@ class PlayingScreen {
 
   draw() {
     this.topbar.draw();
-    this.hoverTile.draw();
+
+    ctx.fillStyle = "#FFFFFF33";
+    ctx.fillRect(
+      this.hoverTile.position.x,
+      this.hoverTile.position.y,
+      this.map.tileSize,
+      this.map.tileSize
+    );
   }
 
   #clickHandler() {
