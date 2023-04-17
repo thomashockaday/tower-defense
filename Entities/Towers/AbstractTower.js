@@ -1,5 +1,9 @@
-class Tower {
+class AbstractTower {
   constructor(position, width, height, radius) {
+    if (new.target === AbstractTower) {
+      throw new TypeError("Cannot construct Tower instances directly");
+    }
+
     this.position = position;
     this.width = width;
     this.height = height;
@@ -13,10 +17,7 @@ class Tower {
       width: this.radius * width,
       height: this.radius * height,
     };
-    this.cooldown = 30;
     this.bullets = [];
-    this.maxBullets = 2;
-    this.cost = 10;
   }
 
   update(step, enemies) {

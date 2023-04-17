@@ -153,11 +153,10 @@ class Map {
       for (let j = 0; j < this.tiles[i].length; j++) {
         if (this.tiles[i][j] === 9) {
           towers.push(
-            new Tower(
+            new BasicTower(
               { x: j * this.tileSize, y: i * this.tileSize },
               this.tileSize,
-              this.tileSize,
-              5
+              this.tileSize
             )
           );
         }

@@ -56,14 +56,13 @@ class PlayingScreen {
   }
 
   #clickHandler() {
-    const tower = new Tower(
+    const tower = new BasicTower(
       {
         x: this.hoverTile.position.x,
         y: this.hoverTile.position.y,
       },
       this.map.tileSize,
-      this.map.tileSize,
-      5
+      this.map.tileSize
     );
 
     if (
