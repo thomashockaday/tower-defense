@@ -1,4 +1,4 @@
-class Collision {
+export default class Collision {
   static rectRect(first, second) {
     return (
       first.position.x < second.position.x + second.width &&

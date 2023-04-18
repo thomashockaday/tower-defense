@@ -1,4 +1,4 @@
-class AbstractEnemy {
+export default class AbstractEnemy {
   constructor(position, size, tileSize, waypoints) {
     if (new.target === AbstractEnemy) {
       throw new TypeError("Cannot construct Enemy instances directly");
@@ -52,7 +52,7 @@ class AbstractEnemy {
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "#c20102";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 

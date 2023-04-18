@@ -1,4 +1,4 @@
-class LoopLevel {
+export default class LoopLevel {
   constructor() {
     /**
      * Key:

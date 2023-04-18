@@ -1,4 +1,4 @@
-class BasicLevel {
+export default class BasicLevel {
   constructor() {
     /**
      * Key:

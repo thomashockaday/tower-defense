@@ -1,4 +1,4 @@
-class Cursor {
+export default class Cursor {
   constructor() {
     this.position = {
       x: 0,

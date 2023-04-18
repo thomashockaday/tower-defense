@@ -1,3 +1,18 @@
+import BasicEnemy from "./Entities/Enemies/BasicEnemy";
+import FastEnemy from "./Entities/Enemies/FastEnemy";
+import StrongEnemy from "./Entities/Enemies/StrongEnemy";
+import Game from "./Game";
+import BasicLevel from "./Levels/BasicLevel";
+import Map from "./Map";
+import GameOverScreen from "./Screens/GameOverScreen";
+import LoadingScreen from "./Screens/LoadingScreen";
+import PlayingScreen from "./Screens/PlayingScreen";
+import ReadyScreen from "./Screens/ReadyScreen";
+import VictoryScreen from "./Screens/VictoryScreen";
+import Collision from "./Utils/Collision";
+import Cursor from "./Utils/Cursor";
+import Wave from "./Wave";
+
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -57,11 +72,11 @@ for (let i = 0; i < 3; i++) {
 let step = 0;
 let animationFrame;
 
-const gameOverScreen = new GameOverScreen(map);
-const loadingScreen = new LoadingScreen(map);
-const playingScreen = new PlayingScreen(map);
-const readyScreen = new ReadyScreen(map, playingScreen);
-const victoryScreen = new VictoryScreen(map);
+const gameOverScreen = new GameOverScreen(map, canvas);
+const loadingScreen = new LoadingScreen(map, canvas);
+const playingScreen = new PlayingScreen(map, cursor);
+const readyScreen = new ReadyScreen(map, canvas, cursor);
+const victoryScreen = new VictoryScreen(map, canvas);
 
 const game = new Game(loadingScreen);
 
@@ -99,6 +114,19 @@ function animate() {
       map.towers[i].update(step, waves[wave].enemies);
 
       for (let j = 0; j < map.towers[i].bullets.length; j++) {
+        if (
+          map.towers[i].bullets[j].position.x > canvas.width ||
+          map.towers[i].bullets[j].position.x +
+            map.towers[i].bullets[j].radius <
+            0 ||
+          map.towers[i].bullets[j].position.y < 0 ||
+          map.towers[i].bullets[j].position.y +
+            map.towers[i].bullets[j].radius >
+            canvas.height
+        ) {
+          map.towers[i].bullets[j].finished = true;
+        }
+
         for (let k = 0; k < waves[wave].enemies.length; k++) {
           if (
             Collision.circleRect(
@@ -129,17 +157,17 @@ function animate() {
 
   game.screen.update();
 
-  map.draw();
+  map.draw(ctx);
 
   map.towers.forEach((tower) => {
-    tower.draw();
+    tower.draw(ctx);
   });
 
   waves.forEach((wave) => {
-    wave.draw();
+    wave.draw(ctx);
   });
 
-  game.screen.draw();
+  game.screen.draw(ctx);
 }
 
 window.addEventListener("load", () => {

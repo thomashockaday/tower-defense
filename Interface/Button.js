@@ -1,25 +1,28 @@
-class Button {
-  constructor(position, width, height, text, textSize) {
+import Collision from "../Utils/Collision";
+
+export default class Button {
+  constructor(position, width, height, text, textSize, cursor) {
     this.position = position;
     this.width = width;
     this.height = height;
     this.text = text;
     this.textSize = textSize;
+    this.cursor = cursor;
 
     this.hover = false;
     this.clicked = false;
   }
 
   update() {
-    this.hover = Collision.rectRect(cursor, this);
+    this.hover = Collision.rectRect(this.cursor, this);
 
-    if (this.hover && cursor.clicking) {
+    if (this.hover && this.cursor.clicking) {
       this.clicked = true;
-      cursor.clicking = false;
+      this.cursor.clicking = false;
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = this.hover ? "white" : "black";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 

@@ -1,5 +1,7 @@
-class GameOverScreen {
-  constructor(map) {
+import Text from "../Interface/Text";
+
+export default class GameOverScreen {
+  constructor(map, canvas) {
     this.map = map;
 
     this.gameOverText = new Text(
@@ -13,7 +15,7 @@ class GameOverScreen {
     //
   }
 
-  draw() {
-    this.gameOverText.draw();
+  draw(ctx) {
+    this.gameOverText.draw(ctx);
   }
 }

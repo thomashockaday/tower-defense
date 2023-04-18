@@ -1,6 +1,10 @@
-class PlayingScreen {
-  constructor(map) {
+import BasicTower from "../Entities/Towers/BasicTower";
+import Topbar from "../Interface/Topbar";
+
+export default class PlayingScreen {
+  constructor(map, cursor) {
     this.map = map;
+    this.cursor = cursor;
 
     this.topbar = new Topbar(
       { x: 0, y: 0 },
@@ -27,25 +31,25 @@ class PlayingScreen {
     this.hoverTile = {
       position: {
         x:
-          Math.floor(cursor.position.x / this.map.tileSize) * this.map.tileSize,
+          Math.floor(this.cursor.position.x / this.map.tileSize) *
+          this.map.tileSize,
         y:
-          Math.floor(cursor.position.y / this.map.tileSize) * this.map.tileSize,
+          Math.floor(this.cursor.position.y / this.map.tileSize) *
+          this.map.tileSize,
       },
       currentTile: {
-        x: Math.floor(cursor.position.x / this.map.tileSize),
-        y: Math.floor(cursor.position.y / this.map.tileSize),
+        x: Math.floor(this.cursor.position.x / this.map.tileSize),
+        y: Math.floor(this.cursor.position.y / this.map.tileSize),
       },
     };
 
-    if (this.active && cursor.clicking) {
+    if (this.active && this.cursor.clicking) {
       this.#clickHandler();
-      cursor.clicking = false;
+      this.cursor.clicking = false;
     }
   }
 
-  draw() {
-    this.topbar.draw();
-
+  draw(ctx) {
     ctx.fillStyle = "#FFFFFF33";
     ctx.fillRect(
       this.hoverTile.position.x,
@@ -53,6 +57,8 @@ class PlayingScreen {
       this.map.tileSize,
       this.map.tileSize
     );
+
+    this.topbar.draw(ctx);
   }
 
   #clickHandler() {

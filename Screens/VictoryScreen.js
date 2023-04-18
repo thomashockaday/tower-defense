@@ -1,5 +1,7 @@
-class VictoryScreen {
-  constructor(map) {
+import Text from "../Interface/Text";
+
+export default class VictoryScreen {
+  constructor(map, canvas) {
     this.map = map;
 
     this.victoryText = new Text(
@@ -13,7 +15,7 @@ class VictoryScreen {
     //
   }
 
-  draw() {
-    this.victoryText.draw();
+  draw(ctx) {
+    this.victoryText.draw(ctx);
   }
 }

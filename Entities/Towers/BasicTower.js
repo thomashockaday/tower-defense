@@ -1,4 +1,6 @@
-class BasicTower extends AbstractTower {
+import AbstractTower from "./AbstractTower";
+
+export default class BasicTower extends AbstractTower {
   constructor(position, width, height) {
     super(position, width, height, 5);
 

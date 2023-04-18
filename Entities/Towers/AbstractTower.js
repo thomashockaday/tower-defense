@@ -1,4 +1,7 @@
-class AbstractTower {
+import Collision from "../../Utils/Collision";
+import Bullet from "../Bullet";
+
+export default class AbstractTower {
   constructor(position, width, height, radius) {
     if (new.target === AbstractTower) {
       throw new TypeError("Cannot construct Tower instances directly");
@@ -43,7 +46,7 @@ class AbstractTower {
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "#ebc90f";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
@@ -56,7 +59,7 @@ class AbstractTower {
     );
 
     this.bullets.forEach((bullet) => {
-      bullet.draw();
+      bullet.draw(ctx);
     });
   }
 

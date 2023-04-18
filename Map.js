@@ -1,4 +1,6 @@
-class Map {
+import BasicTower from "./Entities/Towers/BasicTower";
+
+export default class Map {
   constructor(tiles) {
     this.tiles = tiles;
     this.tileSize = 48;
@@ -6,7 +8,7 @@ class Map {
     this.goal = this.#getGoal();
   }
 
-  draw() {
+  draw(ctx) {
     for (let i = 0; i < this.tiles.length; i++) {
       for (let j = 0; j < this.tiles[i].length; j++) {
         let fillStyle = "#83a904";

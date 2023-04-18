@@ -1,5 +1,10 @@
-class ReadyScreen {
-  constructor(map) {
+import Button from "../Interface/Button";
+import Text from "../Interface/Text";
+
+export default class ReadyScreen {
+  constructor(map, canvas, cursor) {
+    this.canvas = canvas;
+
     this.titleText1 = new Text(
       { x: canvas.width / 2, y: map.tileSize * 2.5 },
       "Tower",
@@ -58,7 +63,8 @@ class ReadyScreen {
       buttonWidth,
       map.tileSize * 1.5,
       "Play",
-      map.tileSize / 2
+      map.tileSize / 2,
+      cursor
     );
 
     this.finished = false;
@@ -72,19 +78,19 @@ class ReadyScreen {
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "grey";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.titleText1.draw();
-    this.titleText2.draw();
-    this.instructions1.draw();
-    this.instructions2.draw();
-    this.instructions3.draw();
-    this.instructions4.draw();
-    this.instructions5.draw();
-    this.instructions6.draw();
-    this.instructions7.draw();
-    this.playButton.draw();
+    this.titleText1.draw(ctx);
+    this.titleText2.draw(ctx);
+    this.instructions1.draw(ctx);
+    this.instructions2.draw(ctx);
+    this.instructions3.draw(ctx);
+    this.instructions4.draw(ctx);
+    this.instructions5.draw(ctx);
+    this.instructions6.draw(ctx);
+    this.instructions7.draw(ctx);
+    this.playButton.draw(ctx);
   }
 }

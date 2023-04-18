@@ -1,4 +1,6 @@
-class BasicEnemy extends AbstractEnemy {
+import AbstractEnemy from "./AbstractEnemy";
+
+export default class BasicEnemy extends AbstractEnemy {
   constructor(position, tileSize, waypoints) {
     super(position, tileSize - 8, tileSize, waypoints);
 

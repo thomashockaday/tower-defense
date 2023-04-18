@@ -1,4 +1,6 @@
-class Wave {
+import Collision from "./Utils/Collision";
+
+export default class Wave {
   constructor(enemies, goal) {
     this.enemies = enemies;
     this.goal = goal;
@@ -23,9 +25,9 @@ class Wave {
     }
   }
 
-  draw() {
+  draw(ctx) {
     this.enemies.forEach((enemy) => {
-      enemy.draw();
+      enemy.draw(ctx);
     });
   }
 }
