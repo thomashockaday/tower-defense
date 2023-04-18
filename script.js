@@ -95,6 +95,29 @@ function animate() {
       waves[wave].update();
     }
 
+    if (cursor.clicking) {
+      const tower = new BasicTower(
+        {
+          x: playingScreen.hoverTile.position.x,
+          y: playingScreen.hoverTile.position.y,
+        },
+        map.tileSize,
+        map.tileSize
+      );
+
+      if (
+        map.canPlaceTower(playingScreen.hoverTile.currentTile) &&
+        coins >= tower.cost
+      ) {
+        map.tiles[playingScreen.hoverTile.currentTile.y][
+          playingScreen.hoverTile.currentTile.x
+        ] = 9;
+        map.towers.push(tower);
+        coins -= tower.cost;
+      }
+      cursor.clicking = false;
+    }
+
     for (let i = 0; i < map.towers.length; i++) {
       map.towers[i].update(step, waves[wave].enemies);
 
