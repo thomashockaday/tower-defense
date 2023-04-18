@@ -1,10 +1,10 @@
 export default class Bullet {
-  constructor(position, velocity) {
+  constructor(position, velocity, speed) {
     this.position = position;
     this.velocity = velocity;
+    this.speed = speed;
 
     this.radius = 4;
-    this.speed = 20;
     this.finished = false;
   }
 

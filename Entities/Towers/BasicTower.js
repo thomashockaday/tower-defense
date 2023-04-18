@@ -8,5 +8,7 @@ export default class BasicTower extends AbstractTower {
     this.maxBullets = 2;
     this.cost = 10;
     this.damage = 1;
+    this.bulletSpeed = 20;
+    this.colour = "#ebc90f";
   }
 }

@@ -16,6 +16,8 @@ export default class AbstractTower {
     this.maxBullets = null;
     this.cost = null;
     this.damage = null;
+    this.bulletSpeed = null;
+    this.colour = null;
 
     this.range = {
       position: {
@@ -52,7 +54,7 @@ export default class AbstractTower {
   }
 
   draw(ctx) {
-    ctx.fillStyle = "#ebc90f";
+    ctx.fillStyle = this.colour;
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     ctx.fillStyle = "#FFFF0011";
@@ -82,7 +84,8 @@ export default class AbstractTower {
       {
         x: Math.cos(angle),
         y: Math.sin(angle),
-      }
+      },
+      this.bulletSpeed
     );
     this.bullets.push(bullet);
   }

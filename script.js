@@ -1,7 +1,7 @@
 import BasicEnemy from "./Entities/Enemies/BasicEnemy";
 import FastEnemy from "./Entities/Enemies/FastEnemy";
 import StrongEnemy from "./Entities/Enemies/StrongEnemy";
-import BasicTower from "./Entities/Towers/BasicTower";
+import SniperTower from "./Entities/Towers/SniperTower";
 import Game from "./Game";
 import BasicLevel from "./Levels/BasicLevel";
 import Map from "./Map";
@@ -26,7 +26,7 @@ canvas.height = map.tiles.length * map.tileSize;
 
 let lives = 3;
 let score = 0;
-let coins = 10;
+let coins = 100;
 
 let wave = 0;
 let waves = [];
@@ -112,7 +112,7 @@ function animate() {
     }
 
     if (cursor.clicking) {
-      const tower = new BasicTower(
+      const tower = new SniperTower(
         {
           x: playingScreen.hoverTile.position.x,
           y: playingScreen.hoverTile.position.y,
