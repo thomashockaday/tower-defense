@@ -1,16 +1,12 @@
-class GameOverScreen {
-  constructor(map) {
-    this.map = map;
+class GameOverScreen extends AbstractScreen {
+  constructor(map, canvas, cursor) {
+    super(map, canvas, cursor);
 
     this.gameOverText = new Text(
-      { x: canvas.width / 2, y: canvas.height / 2 },
+      { x: this.width / 2, y: this.height / 2 },
       "Game Over",
       this.map.tileSize
     );
-  }
-
-  update() {
-    //
   }
 
   draw(ctx) {

@@ -1,21 +1,25 @@
-class PlayingScreen {
-  constructor(map) {
-    this.map = map;
+class PlayingScreen extends AbstractScreen {
+  constructor(map, canvas, cursor) {
+    super(map, canvas, cursor);
 
     this.topbar = new Topbar(
       { x: 0, y: 0 },
-      map.tileSize * map.tiles[0].length,
-      map.tileSize
+      this.map.tileSize * this.map.tiles[0].length,
+      this.map.tileSize
     );
 
     this.hoverTile = {
       position: {
-        x: Math.floor(cursor.position.x / map.tileSize) * map.tileSize,
-        y: Math.floor(cursor.position.y / map.tileSize) * map.tileSize,
+        x:
+          Math.floor(this.cursor.position.x / this.map.tileSize) *
+          this.map.tileSize,
+        y:
+          Math.floor(this.cursor.position.y / this.map.tileSize) *
+          this.map.tileSize,
       },
       tile: {
-        x: Math.floor(cursor.position.x / map.tileSize),
-        y: Math.floor(cursor.position.y / map.tileSize),
+        x: Math.floor(this.cursor.position.x / this.map.tileSize),
+        y: Math.floor(this.cursor.position.y / this.map.tileSize),
       },
     };
 
@@ -37,9 +41,9 @@ class PlayingScreen {
       },
     };
 
-    if (this.active && cursor.clicking) {
+    if (this.active && this.cursor.clicking) {
       this.#clickHandler();
-      cursor.clicking = false;
+      this.cursor.clicking = false;
     }
   }
 
