@@ -23,9 +23,9 @@ class Wave {
     }
   }
 
-  draw() {
+  draw(ctx) {
     this.enemies.forEach((enemy) => {
-      enemy.draw();
+      enemy.draw(ctx);
     });
   }
 }

@@ -13,7 +13,7 @@ class VictoryScreen {
     //
   }
 
-  draw() {
-    this.victoryText.draw();
+  draw(ctx) {
+    this.victoryText.draw(ctx);
   }
 }

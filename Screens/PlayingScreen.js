@@ -43,8 +43,8 @@ class PlayingScreen {
     }
   }
 
-  draw() {
-    this.topbar.draw();
+  draw(ctx) {
+    this.topbar.draw(ctx);
 
     ctx.fillStyle = "#FFFFFF33";
     ctx.fillRect(

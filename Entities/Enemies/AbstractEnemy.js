@@ -52,7 +52,7 @@ class AbstractEnemy {
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "#c20102";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 

@@ -13,7 +13,7 @@ class Text {
     this.textAlign = textAlign;
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "white";
     ctx.font = `${this.textSize}px sans-serif`;
     ctx.textBaseline = this.baseline;

@@ -43,7 +43,7 @@ class AbstractTower {
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "#ebc90f";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
@@ -56,7 +56,7 @@ class AbstractTower {
     );
 
     this.bullets.forEach((bullet) => {
-      bullet.draw();
+      bullet.draw(ctx);
     });
   }
 

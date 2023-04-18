@@ -11,10 +11,10 @@ class LoadingScreen {
     //
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "grey";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    this.titleText.draw();
+    this.titleText.draw(ctx);
   }
 }

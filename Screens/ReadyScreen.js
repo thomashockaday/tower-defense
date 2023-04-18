@@ -72,19 +72,19 @@ class ReadyScreen {
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "grey";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    this.titleText1.draw();
-    this.titleText2.draw();
-    this.instructions1.draw();
-    this.instructions2.draw();
-    this.instructions3.draw();
-    this.instructions4.draw();
-    this.instructions5.draw();
-    this.instructions6.draw();
-    this.instructions7.draw();
-    this.playButton.draw();
+    this.titleText1.draw(ctx);
+    this.titleText2.draw(ctx);
+    this.instructions1.draw(ctx);
+    this.instructions2.draw(ctx);
+    this.instructions3.draw(ctx);
+    this.instructions4.draw(ctx);
+    this.instructions5.draw(ctx);
+    this.instructions6.draw(ctx);
+    this.instructions7.draw(ctx);
+    this.playButton.draw(ctx);
   }
 }

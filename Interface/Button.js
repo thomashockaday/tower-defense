@@ -19,7 +19,7 @@ class Button {
     }
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = this.hover ? "white" : "black";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 

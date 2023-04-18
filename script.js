@@ -129,17 +129,17 @@ function animate() {
 
   game.screen.update();
 
-  map.draw();
+  map.draw(ctx);
 
   map.towers.forEach((tower) => {
-    tower.draw();
+    tower.draw(ctx);
   });
 
   waves.forEach((wave) => {
-    wave.draw();
+    wave.draw(ctx);
   });
 
-  game.screen.draw();
+  game.screen.draw(ctx);
 }
 
 window.addEventListener("load", () => {

@@ -6,7 +6,7 @@ class Map {
     this.goal = this.#getGoal();
   }
 
-  draw() {
+  draw(ctx) {
     for (let i = 0; i < this.tiles.length; i++) {
       for (let j = 0; j < this.tiles[i].length; j++) {
         let fillStyle = "#83a904";

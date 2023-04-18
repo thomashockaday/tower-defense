@@ -13,7 +13,7 @@ class GameOverScreen {
     //
   }
 
-  draw() {
-    this.gameOverText.draw();
+  draw(ctx) {
+    this.gameOverText.draw(ctx);
   }
 }

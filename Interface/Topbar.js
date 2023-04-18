@@ -47,14 +47,14 @@ class Topbar {
     );
   }
 
-  draw() {
+  draw(ctx) {
     ctx.fillStyle = "#01962e";
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
-    this.countdownToNextWaveText.draw();
-    this.waveText.draw();
-    this.livesText.draw();
-    this.scoreText.draw();
-    this.coinsText.draw();
+    this.countdownToNextWaveText.draw(ctx);
+    this.waveText.draw(ctx);
+    this.livesText.draw(ctx);
+    this.scoreText.draw(ctx);
+    this.coinsText.draw(ctx);
   }
 }
