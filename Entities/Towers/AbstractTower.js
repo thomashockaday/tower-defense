@@ -12,6 +12,11 @@ export default class AbstractTower {
     this.height = height;
     this.radius = radius;
 
+    this.cooldown = null;
+    this.maxBullets = null;
+    this.cost = null;
+    this.damage = null;
+
     this.range = {
       position: {
         x: this.position.x - Math.floor(this.radius / 2) * width,

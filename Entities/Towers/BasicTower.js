@@ -7,5 +7,6 @@ export default class BasicTower extends AbstractTower {
     this.cooldown = 30;
     this.maxBullets = 2;
     this.cost = 10;
+    this.damage = 1;
   }
 }

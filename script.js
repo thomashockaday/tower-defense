@@ -158,7 +158,7 @@ function animate() {
               waves[wave].enemies[k]
             )
           ) {
-            waves[wave].enemies[k].health--;
+            waves[wave].enemies[k].health -= map.towers[i].damage;
             map.towers[i].bullets[j].finished = true;
           }
 
