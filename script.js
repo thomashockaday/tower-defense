@@ -1,6 +1,7 @@
 import BasicEnemy from "./Entities/Enemies/BasicEnemy";
 import FastEnemy from "./Entities/Enemies/FastEnemy";
 import StrongEnemy from "./Entities/Enemies/StrongEnemy";
+import BasicTower from "./Entities/Towers/BasicTower";
 import Game from "./Game";
 import BasicLevel from "./Levels/BasicLevel";
 import Map from "./Map";
