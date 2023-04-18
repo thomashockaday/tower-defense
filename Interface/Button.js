@@ -1,10 +1,9 @@
 class Button {
-  constructor(position, width, height, text, textSize) {
+  constructor(position, width, height, text) {
     this.position = position;
     this.width = width;
     this.height = height;
     this.text = text;
-    this.textSize = textSize;
 
     this.hover = false;
     this.clicked = false;
@@ -24,7 +23,8 @@ class Button {
     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     ctx.fillStyle = this.hover ? "black" : "white";
-    ctx.font = `${this.textSize}px sans-serif`;
+    const textSize = this.height / 3;
+    ctx.font = `${textSize}px sans-serif`;
     ctx.textBaseline = "middle";
     ctx.textAlign = "center";
     ctx.fillText(

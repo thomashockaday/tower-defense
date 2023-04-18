@@ -59,8 +59,7 @@ class ReadyScreen extends AbstractScreen {
       },
       buttonWidth,
       map.tileSize * 1.5,
-      "Play",
-      map.tileSize / 2
+      "Play"
     );
 
     this.finished = false;
