@@ -153,11 +153,19 @@ canvas.addEventListener("mousemove", (e) => {
   };
 });
 
+canvas.addEventListener("touchstart", () => {
+  cursor.clicking = true;
+});
+
 canvas.addEventListener("mousedown", () => {
   cursor.clicking = true;
 });
 
 canvas.addEventListener("mouseup", () => {
+  cursor.clicking = false;
+});
+
+canvas.addEventListener("touchend", () => {
   cursor.clicking = false;
 });
 
