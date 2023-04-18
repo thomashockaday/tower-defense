@@ -1,20 +1,21 @@
 class Button {
-  constructor(position, width, height, text) {
+  constructor(position, width, height, text, cursor) {
     this.position = position;
     this.width = width;
     this.height = height;
     this.text = text;
+    this.cursor = cursor;
 
     this.hover = false;
     this.clicked = false;
   }
 
   update() {
-    this.hover = Collision.rectRect(cursor, this);
+    this.hover = Collision.rectRect(this.cursor, this);
 
-    if (this.hover && cursor.clicking) {
+    if (this.hover && this.cursor.clicking) {
       this.clicked = true;
-      cursor.clicking = false;
+      this.cursor.clicking = false;
     }
   }
 
