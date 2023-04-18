@@ -51,7 +51,7 @@ for (let i = 0; i < 3; i++) {
     );
   }
 
-  waves.push(new Wave(enemies, map.goal));
+  waves.push(new Wave(enemies));
 }
 
 let step = 0;
@@ -108,6 +108,19 @@ function animate() {
           ) {
             waves[wave].enemies[k].health--;
             map.towers[i].bullets[j].finished = true;
+          }
+
+          if (waves[wave].enemies[k].health <= 0) {
+            score++;
+            coins += waves[wave].enemies[k].coins;
+            waves[wave].enemies.splice(k, 1);
+            continue;
+          }
+
+          if (Collision.rectRect(waves[wave].enemies[k], map.goal)) {
+            waves[wave].enemies.splice(k, 1);
+            lives--;
+            continue;
           }
         }
       }
