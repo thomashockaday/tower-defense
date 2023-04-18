@@ -44,8 +44,6 @@ class PlayingScreen {
   }
 
   draw(ctx) {
-    this.topbar.draw(ctx);
-
     ctx.fillStyle = "#FFFFFF33";
     ctx.fillRect(
       this.hoverTile.position.x,
@@ -53,6 +51,8 @@ class PlayingScreen {
       this.map.tileSize,
       this.map.tileSize
     );
+
+    this.topbar.draw(ctx);
   }
 
   #clickHandler() {
