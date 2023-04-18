@@ -72,11 +72,11 @@ for (let i = 0; i < 3; i++) {
 let step = 0;
 let animationFrame;
 
-const gameOverScreen = new GameOverScreen(map, canvas);
-const loadingScreen = new LoadingScreen(map, canvas);
-const playingScreen = new PlayingScreen(map, cursor);
+const gameOverScreen = new GameOverScreen(map, canvas, cursor);
+const loadingScreen = new LoadingScreen(map, canvas, cursor);
+const playingScreen = new PlayingScreen(map, canvas, cursor);
 const readyScreen = new ReadyScreen(map, canvas, cursor);
-const victoryScreen = new VictoryScreen(map, canvas);
+const victoryScreen = new VictoryScreen(map, canvas, cursor);
 
 const game = new Game(loadingScreen);
 

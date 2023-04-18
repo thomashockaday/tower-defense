@@ -1,23 +1,20 @@
 import Text from "../Interface/Text";
+import AbstractScreen from "./AbstractScreen";
 
-export default class LoadingScreen {
-  constructor(map, canvas) {
-    this.canvas = canvas;
+export default class LoadingScreen extends AbstractScreen {
+  constructor(map, canvas, cursor) {
+    super(map, canvas, cursor);
 
     this.titleText = new Text(
-      { x: canvas.width / 2, y: canvas.height / 2 },
+      { x: this.width / 2, y: this.height / 2 },
       "Loading",
-      map.tileSize
+      this.map.tileSize
     );
-  }
-
-  update() {
-    //
   }
 
   draw(ctx) {
     ctx.fillStyle = "grey";
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.fillRect(0, 0, this.width, this.height);
 
     this.titleText.draw(ctx);
   }

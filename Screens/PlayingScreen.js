@@ -1,25 +1,29 @@
 import BasicTower from "../Entities/Towers/BasicTower";
 import Topbar from "../Interface/Topbar";
+import AbstractScreen from "./AbstractScreen";
 
-export default class PlayingScreen {
-  constructor(map, cursor) {
-    this.map = map;
-    this.cursor = cursor;
+export default class PlayingScreen extends AbstractScreen {
+  constructor(map, canvas, cursor) {
+    super(map, canvas, cursor);
 
     this.topbar = new Topbar(
       { x: 0, y: 0 },
-      map.tileSize * map.tiles[0].length,
-      map.tileSize
+      this.map.tileSize * this.map.tiles[0].length,
+      this.map.tileSize
     );
 
     this.hoverTile = {
       position: {
-        x: Math.floor(cursor.position.x / map.tileSize) * map.tileSize,
-        y: Math.floor(cursor.position.y / map.tileSize) * map.tileSize,
+        x:
+          Math.floor(this.cursor.position.x / this.map.tileSize) *
+          this.map.tileSize,
+        y:
+          Math.floor(this.cursor.position.y / this.map.tileSize) *
+          this.map.tileSize,
       },
       tile: {
-        x: Math.floor(cursor.position.x / map.tileSize),
-        y: Math.floor(cursor.position.y / map.tileSize),
+        x: Math.floor(this.cursor.position.x / this.map.tileSize),
+        y: Math.floor(this.cursor.position.y / this.map.tileSize),
       },
     };
 
