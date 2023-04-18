@@ -66,7 +66,7 @@ for (let i = 0; i < 3; i++) {
     );
   }
 
-  waves.push(new Wave(enemies, map.goal));
+  waves.push(new Wave(enemies));
 }
 
 let step = 0;
@@ -110,6 +110,29 @@ function animate() {
       waves[wave].update();
     }
 
+    if (cursor.clicking) {
+      const tower = new BasicTower(
+        {
+          x: playingScreen.hoverTile.position.x,
+          y: playingScreen.hoverTile.position.y,
+        },
+        map.tileSize,
+        map.tileSize
+      );
+
+      if (
+        map.canPlaceTower(playingScreen.hoverTile.currentTile) &&
+        coins >= tower.cost
+      ) {
+        map.tiles[playingScreen.hoverTile.currentTile.y][
+          playingScreen.hoverTile.currentTile.x
+        ] = 9;
+        map.towers.push(tower);
+        coins -= tower.cost;
+      }
+      cursor.clicking = false;
+    }
+
     for (let i = 0; i < map.towers.length; i++) {
       map.towers[i].update(step, waves[wave].enemies);
 
@@ -136,6 +159,19 @@ function animate() {
           ) {
             waves[wave].enemies[k].health--;
             map.towers[i].bullets[j].finished = true;
+          }
+
+          if (waves[wave].enemies[k].health <= 0) {
+            score++;
+            coins += waves[wave].enemies[k].coins;
+            waves[wave].enemies.splice(k, 1);
+            continue;
+          }
+
+          if (Collision.rectRect(waves[wave].enemies[k], map.goal)) {
+            waves[wave].enemies.splice(k, 1);
+            lives--;
+            continue;
           }
         }
       }
@@ -181,11 +217,19 @@ canvas.addEventListener("mousemove", (e) => {
   };
 });
 
+canvas.addEventListener("touchstart", () => {
+  cursor.clicking = true;
+});
+
 canvas.addEventListener("mousedown", () => {
   cursor.clicking = true;
 });
 
 canvas.addEventListener("mouseup", () => {
+  cursor.clicking = false;
+});
+
+canvas.addEventListener("touchend", () => {
   cursor.clicking = false;
 });
 

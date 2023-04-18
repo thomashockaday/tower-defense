@@ -46,11 +46,6 @@ export default class PlayingScreen extends AbstractScreen {
         y: Math.floor(this.cursor.position.y / this.map.tileSize),
       },
     };
-
-    if (this.active && this.cursor.clicking) {
-      this.#clickHandler();
-      this.cursor.clicking = false;
-    }
   }
 
   draw(ctx) {
@@ -63,27 +58,5 @@ export default class PlayingScreen extends AbstractScreen {
     );
 
     this.topbar.draw(ctx);
-  }
-
-  #clickHandler() {
-    const tower = new BasicTower(
-      {
-        x: this.hoverTile.position.x,
-        y: this.hoverTile.position.y,
-      },
-      this.map.tileSize,
-      this.map.tileSize
-    );
-
-    if (
-      this.map.canPlaceTower(this.hoverTile.currentTile) &&
-      coins >= tower.cost
-    ) {
-      this.map.tiles[this.hoverTile.currentTile.y][
-        this.hoverTile.currentTile.x
-      ] = 9;
-      this.map.towers.push(tower);
-      coins -= tower.cost;
-    }
   }
 }
