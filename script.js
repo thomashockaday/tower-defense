@@ -234,4 +234,8 @@ canvas.addEventListener("touchend", () => {
   cursor.clicking = false;
 });
 
+canvas.addEventListener("touchcancel", () => {
+  cursor.clicking = false;
+});
+
 animate();
