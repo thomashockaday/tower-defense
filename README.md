@@ -9,8 +9,3 @@ A simple tower defense game made with vanilla JS and HTML canvas
 3. `npm i`
 4. `npm run dev`
 5. Visit http://localhost:5173/tower-defense in the browser
-
-## Deployment
-
-1. Commit and push all changes to master.
-2. `npm run deploy`.
